@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.scalariform:scalariform_2.11:0.1.7">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scalariform/scalariform_2.11/0.1.7/7e542ae64556a0908fd04c0edceb4fe95cbccea4/scalariform_2.11-0.1.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scalariform/scalariform_2.11/0.1.7/6570d0084930e0c4d87b111e12cc1171d484960e/scalariform_2.11-0.1.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

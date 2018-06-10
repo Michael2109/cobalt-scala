@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.scala-lang.modules:scala-asm:5.1.0-scala-2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-asm/5.1.0-scala-2/d29a1466f3ab400174c359852bdf0e827a189b33/scala-asm-5.1.0-scala-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-asm/5.1.0-scala-2/edeb54ecce2671917ae182f9d7c0f4ee67d60ea1/scala-asm-5.1.0-scala-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
