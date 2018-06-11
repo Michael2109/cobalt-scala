@@ -6,8 +6,5 @@ class FloatConstant(valueInit: Float) extends Expression
 {
   val value: Float = valueInit
 
-  override def toString: String =
-  {
-    "Float:" + value
-  }
+  override def toString: String = value + "f"
 }

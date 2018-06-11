@@ -11,6 +11,6 @@ object Main extends JavaTokenParsers with ExpressionParser
 
   def main(args: Array[String]) =
   {
-      println(parseAll(parser, "(a+b)+(1+2)"))
+      println(parseAll(parser, "(a+b)+(1+2) - 5 * 7 / 3"))
   }
 }

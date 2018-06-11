@@ -6,5 +6,5 @@ class Identifier(nameInit: Name) extends Expression
 {
   val name = nameInit
 
-  override def toString: String = "Identifier: " + name
+  override def toString: String = name.toString
 }
