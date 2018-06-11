@@ -44,6 +44,10 @@ dependencies {
 
     // Scala cobalt
     compile group: 'org.scala-lang', name: 'scala-compiler', version: '2.12.1'
+
+    // https://mvnrepository.com/artifact/com.lihaoyi/fastparse-utils
+    compile group: 'com.lihaoyi', name: 'fastparse-utils_2.11', version: '0.3.0'
+
 }
 
 allprojects {
