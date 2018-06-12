@@ -45,8 +45,12 @@ dependencies {
     // Scala cobalt
     compile group: 'org.scala-lang', name: 'scala-compiler', version: '2.12.1'
 
-    // https://mvnrepository.com/artifact/com.lihaoyi/fastparse-utils
-    compile group: 'com.lihaoyi', name: 'fastparse-utils_2.11', version: '0.3.0'
+    // https://mvnrepository.com/artifact/com.lihaoyi/fastparse
+    compile group: 'com.lihaoyi', name: 'fastparse_2.12', version: '1.0.0'
+
+    // https://mvnrepository.com/artifact/org.parboiled/parboiled
+    compile group: 'org.parboiled', name: 'parboiled_2.11', version: '2.0.0'
+
 
 }
 

@@ -2,13 +2,13 @@ package cobalt.parser.expression
 
 import cobalt.ast.expression.Expression
 import cobalt.ast.operators.{Add, Divide, Multiply, Subtract}
-import cobalt.parser.expression.number.NumberParser
-import cobalt.parser.operators.OperatorParser
 
 import scala.util.parsing.combinator.JavaTokenParsers
 
 // https://gist.github.com/sofoklis/3343973
-trait ExpressionParser extends JavaTokenParsers with NumberParser with IdentifierParser with OperatorParser {
+class ExpressionParser
+{
+/*
 
   def expression(): Parser[Expression] = {
     subtract()
@@ -19,5 +19,6 @@ trait ExpressionParser extends JavaTokenParsers with NumberParser with Identifie
   private def multiply(): Parser[Expression] = divide() ~ rep("*" ~ divide()) ^^ { case f1 ~ fs ⇒ (f1 /: fs)((f,fn) => new Multiply(f, fn._2)) }
   private def divide(): Parser[Expression] = (parentheses ~ rep("/" ~ parentheses())) ^^ { case f1 ~ fs ⇒ (f1 /: fs)((f,fn) => new Divide(f, fn._2)) }
   private def parentheses(): Parser[Expression] = identifier() | floatConstant() | ("(" ~ add ~ ")" ^^ { case "(" ~ exp ~ ")" ⇒ exp })
+*/
 
 }

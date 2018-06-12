@@ -1,22 +1,17 @@
 package cobalt.parser
 
-import cobalt.ast.AST
-import cobalt.parser.module.ModuleParser
+import fastparse.core.Parsed
 
-import scala.util.parsing.combinator.JavaTokenParsers
-
-object Main extends JavaTokenParsers with ModuleParser
+object Main
 {
-  def parser: Parser[AST] = ifStatement
-
   def main(args: Array[String]) =
   {
-    val code =
-      """
-        |if((a+b)+(1+2) - 5 * 7 / 3)
-        |    1 + 2
-      """.stripMargin
-
-    println(parseAll(indentBlock, code))
+    def check(str: String) = {
+      val Parsed.Success(value, _) = IndentationTest.expr.parse(str)
+      println(value)
+    }
+    check("example\n1")
+    println()
   }
+
 }
