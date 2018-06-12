@@ -51,7 +51,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.parboiled/parboiled
     compile group: 'org.parboiled', name: 'parboiled_2.11', version: '2.0.0'
 
-
+    // https://mvnrepository.com/artifact/com.github.nikita-volkov/sext
+    compile group: 'com.github.nikita-volkov', name: 'sext', version: '0.2.2'
 }
 
 allprojects {
