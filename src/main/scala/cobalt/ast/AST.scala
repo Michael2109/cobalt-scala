@@ -21,7 +21,7 @@ object Ast{
 
   sealed trait stmt
   object stmt{
-    case class MethodDef(name: identifier, args: arguments, body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
+    case class MethodDef(name: identifier, fields: Fields, body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
     case class ClassDef(name: identifier, bases: Seq[expr], body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
     case class Return(value: Option[expr]) extends stmt
 
@@ -69,7 +69,7 @@ object Ast{
     case class BoolOp(op: boolop, values: Seq[expr]) extends expr
     case class BinOp(left: expr, op: operator, right: expr) extends expr
     case class UnaryOp(op: unaryop, operand: expr) extends expr
-    case class Lambda(args: arguments, body: expr) extends expr
+    case class Lambda(fields: Fields, body: expr) extends expr
     case class IfExp(test: expr, body: expr, orelse: expr) extends expr
     case class Dict(keys: Seq[expr], values: Seq[expr]) extends expr
     case class Set(elts: Seq[expr]) extends expr
@@ -170,7 +170,10 @@ object Ast{
     case class ExceptHandler(`type`: Option[expr], name: Option[expr], body: Seq[stmt]) extends excepthandler
   }
 
-  case class arguments(args: Seq[expr], vararg: Option[identifier], kwarg: Option[identifier], defaults: Seq[expr])
+  case class Field(name: identifier, `type`: identifier)
+  case class Fields(fields: Seq[Field])
+
+  //case class arguments(args: Seq[expr], vararg: Option[identifier], kwarg: Option[identifier], defaults: Seq[expr])
 
   // keyword arguments supplied to call
   case class keyword(arg: identifier, value: expr)

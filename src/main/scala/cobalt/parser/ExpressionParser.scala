@@ -124,7 +124,7 @@ object ExpressionParser
   val list_comp = P( list_comp_contents ).map(Ast.expr.ListComp.tupled)
   val generator = P( list_comp_contents ).map(Ast.expr.GeneratorExp.tupled)
 
-  val lambdef: P[Ast.expr.Lambda] = P( LexicalParser.kw("lambda") ~ varargslist ~ ":" ~ test ).map(Ast.expr.Lambda.tupled)
+  val lambdef: P[Ast.expr.Lambda] = P( LexicalParser.kw("lambda") ~ fields ~ ":" ~ test ).map(Ast.expr.Lambda.tupled)
   val trailer: P[Ast.expr => Ast.expr] = {
     val call = P("(" ~ arglist ~ ")").map{ case (args, (keywords, starargs, kwargs)) => (lhs: Ast.expr) => Ast.expr.Call(lhs, args, keywords, starargs, kwargs)}
     val slice = P("[" ~ subscriptlist ~ "]").map(args => (lhs: Ast.expr) => Ast.expr.Subscript(lhs, args, Ast.expr_context.Load))
@@ -191,14 +191,9 @@ object ExpressionParser
 
   val yield_expr: P[Ast.expr.Yield] = P( LexicalParser.kw("yield") ~ testlist.map(tuplize).? ).map(Ast.expr.Yield)
 
-  val varargslist: P[Ast.arguments] = {
-    val named_arg = P( fpdef ~ ("=" ~ test).? )
-    val x = P( named_arg.rep(sep = ",") ~ ",".? ~ ("*" ~ NAME).? ~ ",".? ~ ("**" ~ NAME).? ).map{
-      case (normal_args, starargs, kwargs) =>
-        val (args, defaults) = normal_args.unzip
-        Ast.arguments(args, starargs, kwargs, defaults.flatten)
-    }
-    P( x )
+  val fields: P[Ast.Fields] = {
+    val field = (NAME ~ ":" ~ NAME).map(x => new Ast.Field(x._1, x._2))
+    field.rep(sep = ",").map(x => new Ast.Fields(x))
   }
 
   val fpdef: P[Ast.expr] = P( NAME.map(Ast.expr.Name(_, Ast.expr_context.Param)) | "(" ~ fplist ~ ")" )

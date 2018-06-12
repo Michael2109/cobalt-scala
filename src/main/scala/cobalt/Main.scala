@@ -33,7 +33,7 @@ object Main
   def main(args: Array[String]) =
   {
     def code =
-      """let functionname( parameters )= do
+      """let functionname( parameters: Int )= do
         |  if true then
         |    10
         |  elif false then

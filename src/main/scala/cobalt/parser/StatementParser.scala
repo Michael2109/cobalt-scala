@@ -55,7 +55,7 @@ class Statements(indent: Int) {
   val methodDef: P[Seq[Ast.expr] => Ast.stmt.MethodDef] = P(LexicalParser.kw("let") ~/ NAME ~ parameters ~ "=" ~~ indentedBlock).map {
     case (name, args, suite) => Ast.stmt.MethodDef(name, args, suite, _)
   }
-  val parameters: P[Ast.arguments] = P("(" ~ varargslist ~ ")")
+  val parameters: P[Ast.Fields] = P("(" ~ fields ~ ")")
 
   val stmt: P[Seq[Ast.stmt]] = P(compound_stmt.map(Seq(_)) | simple_stmt)
 
