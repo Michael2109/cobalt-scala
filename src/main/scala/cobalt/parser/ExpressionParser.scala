@@ -12,9 +12,9 @@ object ExpressionParser
     case xs => Ast.expr.Tuple(xs, Ast.expr_context.Load)
   }
 
-  val NAME: P[Ast.identifier] = LexicalParser.identifier
-  val NUMBER: P[Ast.expr.Num] = P( LexicalParser.floatnumber | LexicalParser.longinteger | LexicalParser.integer | LexicalParser.imagnumber ).map(Ast.expr.Num)
-  val STRING: P[Ast.string] = LexicalParser.stringliteral
+  val name: P[Ast.identifier] = LexicalParser.identifier
+  val number: P[Ast.expr.Num] = P( LexicalParser.floatnumber | LexicalParser.longinteger | LexicalParser.integer | LexicalParser.imagnumber ).map(Ast.expr.Num)
+  val string: P[Ast.string] = LexicalParser.stringliteral
 
   val test: P[Ast.expr] = {
     val ternary = P( or_test ~ (LexicalParser.kw("if") ~ or_test ~ LexicalParser.kw("else") ~ test).? ).map{
@@ -87,10 +87,10 @@ object ExpressionParser
 
   val arith_expr: P[Ast.expr] = P( Chain(term, Add | Sub) )
   val term: P[Ast.expr] = P( Chain(factor, Mult | Div | Mod | FloorDiv) )
-  // NUMBER appears here and below in `atom` to give it precedence.
+  // number appears here and below in `atom` to give it precedence.
   // This ensures that "-2" will parse as `Num(-2)` rather than
   // as `UnaryOp(USub, Num(2))`.
-  val factor: P[Ast.expr] = P( NUMBER | Unary(factor) | power )
+  val factor: P[Ast.expr] = P( number | Unary(factor) | power )
   val power: P[Ast.expr] = P( atom ~ trailer.rep ~ (Pow ~ factor).? ).map{
     case (lhs, trailers, rhs) =>
       val left = trailers.foldLeft(lhs)((l, t) => t(l))
@@ -111,9 +111,9 @@ object ExpressionParser
         "[" ~ (list_comp | list) ~ "]" |
         "{" ~ dictorsetmaker ~ "}" |
         "`" ~ testlist1.map(x => Ast.expr.Repr(Ast.expr.Tuple(x, Ast.expr_context.Load))) ~ "`" |
-        STRING.rep(1).map(_.mkString).map(Ast.expr.Str) |
-        NAME.map(Ast.expr.Name(_, Ast.expr_context.Load)) |
-        NUMBER
+        string.rep(1).map(_.mkString).map(Ast.expr.Str) |
+        name.map(Ast.expr.Name(_, Ast.expr_context.Load)) |
+        number
     )
   }
   val list_contents = P( test.rep(1, ",") ~ ",".? )
@@ -128,7 +128,7 @@ object ExpressionParser
   val trailer: P[Ast.expr => Ast.expr] = {
     val call = P("(" ~ arglist ~ ")").map{ case (args, (keywords, starargs, kwargs)) => (lhs: Ast.expr) => Ast.expr.Call(lhs, args, keywords, starargs, kwargs)}
     val slice = P("[" ~ subscriptlist ~ "]").map(args => (lhs: Ast.expr) => Ast.expr.Subscript(lhs, args, Ast.expr_context.Load))
-    val attr = P("." ~ NAME).map(id => (lhs: Ast.expr) => Ast.expr.Attribute(lhs, id, Ast.expr_context.Load))
+    val attr = P("." ~ name).map(id => (lhs: Ast.expr) => Ast.expr.Attribute(lhs, id, Ast.expr_context.Load))
     P( call | slice | attr )
   }
   val subscriptlist = P( subscript.rep(1, ",") ~ ",".? ).map{
@@ -177,7 +177,7 @@ object ExpressionParser
     case (x, Nil) => x
     case (x, gens) => Ast.expr.GeneratorExp(x, gens)
   }
-  val named_argument = P( NAME ~ "=" ~ test  ).map(Ast.keyword.tupled)
+  val named_argument = P( name ~ "=" ~ test  ).map(Ast.keyword.tupled)
 
   val comp_for: P[Ast.comprehension] = P( "for" ~ exprlist ~ "in" ~ or_test ~ comp_if.rep ).map{
     case (targets, test, ifs) => Ast.comprehension(tuplize(targets), test, ifs)
@@ -187,15 +187,15 @@ object ExpressionParser
   val testlist1: P[Seq[Ast.expr]] = P( test.rep(1, sep = ",") )
 
   // not used in grammar, but may appear in "node" passed from Parser to Compiler
-  //  val encoding_decl: P0 = P( NAME )
+  //  val encoding_decl: P0 = P( name )
 
   val yield_expr: P[Ast.expr.Yield] = P( LexicalParser.kw("yield") ~ testlist.map(tuplize).? ).map(Ast.expr.Yield)
 
   val fields: P[Ast.Fields] = {
-    val field = (NAME ~ ":" ~ NAME).map(x => new Ast.Field(x._1, x._2))
+    val field = (name ~ ":" ~ name).map(x => new Ast.Field(x._1, x._2))
     field.rep(sep = ",").map(x => new Ast.Fields(x))
   }
 
-  val fpdef: P[Ast.expr] = P( NAME.map(Ast.expr.Name(_, Ast.expr_context.Param)) | "(" ~ fplist ~ ")" )
+  val fpdef: P[Ast.expr] = P( name.map(Ast.expr.Name(_, Ast.expr_context.Param)) | "(" ~ fplist ~ ")" )
   val fplist: P[Ast.expr] = P( fpdef.rep(sep = ",") ~ ",".? ).map(Ast.expr.Tuple(_, Ast.expr_context.Param))
 }

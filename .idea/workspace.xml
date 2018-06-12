@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db30762c-314e-4049-aa49-7ac51f885ad7" name="Default" comment="Restructured files.">
+    <list default="true" id="db30762c-314e-4049-aa49-7ac51f885ad7" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/Main.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/Main.scala" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="Main.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/Main.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+            <state relative-caret-position="432">
+              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#751#787#0" expanded="true" />
@@ -38,12 +39,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatementParser.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="StatementParser.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="57" column="44" lean-forward="true" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
-              <folding />
+            <state relative-caret-position="470">
+              <caret line="107" column="72" lean-forward="true" selection-start-line="107" selection-start-column="72" selection-end-line="107" selection-end-column="72" />
+              <folding>
+                <element signature="e#23#47#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,8 +54,8 @@
       <file leaf-file-name="ExpressionParser.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="194" column="56" lean-forward="false" selection-start-line="194" selection-start-column="56" selection-end-line="194" selection-end-column="56" />
+            <state relative-caret-position="42">
+              <caret line="50" column="35" lean-forward="true" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
               <folding>
                 <element signature="e#23#47#0" expanded="true" />
               </folding>
@@ -80,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AST.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AST.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="302">
+              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -93,8 +96,8 @@
       <file leaf-file-name="LexicalParser.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+            <state relative-caret-position="504">
+              <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -109,14 +112,18 @@
       <find>Ast.Expression</find>
       <find>express</find>
       <find>method</find>
-      <find>NAME</find>
-      <find>var</find>
+      <find>Ast.Statement</find>
       <find>methodDef</find>
       <find>c</find>
+      <find>&quot;print</find>
+      <find>NAME</find>
+      <find>statement</find>
+      <find>var</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>Ast.expression</replace>
+      <replace>Statement</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -430,9 +437,12 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/Main.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/cobalt/ast/statement.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/cobalt/ast/Statement.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala" />
       </list>
     </option>
   </component>
@@ -480,17 +490,6 @@
             <path>
               <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
               <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
@@ -709,7 +708,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528836307108</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added parsing field type with method definitions.">
+      <created>1528839478485</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1528839478485</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -739,7 +745,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25198728" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -758,7 +764,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated ignored files." />
     <MESSAGE value="Restructured files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Restructured files." />
+    <MESSAGE value="Added parsing field type with method definitions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added parsing field type with method definitions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -804,7 +811,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1470">
           <caret line="70" column="6" lean-forward="true" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
-          <folding />
+          <folding>
+            <element signature="e#23#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -825,18 +834,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/Main.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        <state relative-caret-position="432">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#751#787#0" expanded="true" />
@@ -844,29 +845,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/ast/Statement.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="57" column="44" lean-forward="true" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="194" column="56" lean-forward="false" selection-start-line="194" selection-start-column="56" selection-end-line="194" selection-end-column="56" />
+        <state relative-caret-position="42">
+          <caret line="50" column="35" lean-forward="true" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
           <folding>
             <element signature="e#23#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="302">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="107" column="72" lean-forward="true" selection-start-line="107" selection-start-column="72" selection-end-line="107" selection-end-column="72" />
+          <folding>
+            <element signature="e#23#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -47,12 +47,12 @@ class Statements(indent: Int) {
   val decorators = P(decorator.rep)
   val decorated: P[Ast.stmt] = P(decorators ~ (classDef | methodDef)).map { case (a, b) => b(a) }
   val classDef: P[Seq[Ast.expr] => Ast.stmt.ClassDef] =
-    P(LexicalParser.kw("class") ~/ NAME ~ ("(" ~ testlist.? ~ ")").?.map(_.toSeq.flatten.flatten) ~ ":" ~~ indentedBlock).map {
+    P(LexicalParser.kw("class") ~/ name ~ ("(" ~ testlist.? ~ ")").?.map(_.toSeq.flatten.flatten) ~ ":" ~~ indentedBlock).map {
       case (a, b, c) => Ast.stmt.ClassDef(a, b, c, _)
     }
 
 
-  val methodDef: P[Seq[Ast.expr] => Ast.stmt.MethodDef] = P(LexicalParser.kw("let") ~/ NAME ~ parameters ~ "=" ~~ indentedBlock).map {
+  val methodDef: P[Seq[Ast.expr] => Ast.stmt.MethodDef] = P(LexicalParser.kw("let") ~/ name ~ parameters ~ "=" ~~ indentedBlock).map {
     case (name, args, suite) => Ast.stmt.MethodDef(name, args, suite, _)
   }
   val parameters: P[Ast.Fields] = P("(" ~ fields ~ ")")
@@ -97,6 +97,11 @@ class Statements(indent: Int) {
     val dest = P(">>" ~ test ~ ("," ~ test).rep ~ ",".?).map { case (dest, exprs) => Ast.stmt.Print(Some(dest), exprs, true) }
     P("print" ~~ " ".rep ~~ (noDest | dest))
   }
+  val println_stmt: P[Ast.stmt.Println] = {
+    val noDest = P(test.rep(sep = ",") ~ ",".?).map(Ast.stmt.Println(None, _, true))
+    val dest = P(">>" ~ test ~ ("," ~ test).rep ~ ",".?).map { case (dest, exprs) => Ast.stmt.Println(Some(dest), exprs, true) }
+    P("println" ~~ " ".rep ~~ (noDest | dest))
+  }
   val del_stmt = P(LexicalParser.kw("del") ~~ " ".rep ~~ exprlist).map(Ast.stmt.Delete)
   val pass_stmt = P(LexicalParser.kw("pass")).map(_ => Ast.stmt.Pass)
   val flow_stmt: P[Ast.stmt] = P(break_stmt | continue_stmt | return_stmt | raise_stmt | yield_stmt)
@@ -116,12 +121,12 @@ class Statements(indent: Int) {
       case (dots, module, names) => Ast.stmt.ImportFrom(module.map(Ast.identifier), names, dots.map(_.length))
     }
   }
-  val import_as_name: P[Ast.alias] = P(NAME ~ (LexicalParser.kw("as") ~ NAME).?).map(Ast.alias.tupled)
-  val dotted_as_name: P[Ast.alias] = P(dotted_name.map(x => Ast.identifier(x.map(_.name).mkString("."))) ~ (LexicalParser.kw("as") ~ NAME).?).map(Ast.alias.tupled)
+  val import_as_name: P[Ast.alias] = P(name ~ (LexicalParser.kw("as") ~ name).?).map(Ast.alias.tupled)
+  val dotted_as_name: P[Ast.alias] = P(dotted_name.map(x => Ast.identifier(x.map(_.name).mkString("."))) ~ (LexicalParser.kw("as") ~ name).?).map(Ast.alias.tupled)
   val import_as_names = P(import_as_name.rep(1, ",") ~ (",").?)
   val dotted_as_names = P(dotted_as_name.rep(1, ","))
-  val dotted_name = P(NAME.rep(1, "."))
-  val global_stmt: P[Ast.stmt.Global] = P(LexicalParser.kw("global") ~ NAME.rep(sep = ",")).map(Ast.stmt.Global)
+  val dotted_name = P(name.rep(1, "."))
+  val global_stmt: P[Ast.stmt.Global] = P(LexicalParser.kw("global") ~ name.rep(sep = ",")).map(Ast.stmt.Global)
   val exec_stmt: P[Ast.stmt.Exec] = P(LexicalParser.kw("exec") ~ expr ~ (LexicalParser.kw("in") ~ test ~ ("," ~ test).?).?).map {
     case (expr, None) => Ast.stmt.Exec(expr, None, None)
     case (expr, Some((globals, None))) => Ast.stmt.Exec(expr, Some(globals), None)

@@ -31,6 +31,7 @@ object Ast{
 
     // not sure if bool allowed: is, can always use int
     case class Print(dest: Option[expr], values: Seq[expr], nl: bool) extends stmt
+    case class Println(dest: Option[expr], values: Seq[expr], nl: bool) extends stmt
 
     // use 'orelse' because else is a keyword in target languages
     case class For(target: expr, iter: expr, body: Seq[stmt], orelse: Seq[stmt]) extends stmt
