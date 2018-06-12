@@ -63,7 +63,7 @@ allprojects {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala', 'src/main/java']
+            srcDirs = ['src/main/scala']
         }
         java {
             srcDirs = []
@@ -75,8 +75,7 @@ sourceSets {
 
     test {
         scala {
-
-            include "cobalt"
+            srcDirs = ['src/test/scala']
         }
         resources {
             srcDir 'resources'
@@ -96,4 +95,16 @@ scaladoc {
     source = sourceSets.main.allScala
     classpath = configurations.compile
     destinationDir = reporting.file("../../vendors/docs")
+}
+
+task scalaTest(dependsOn: testClasses) << {
+    description = 'Runs Scalatest suite'
+    ant.taskdef(name: 'scalatest',
+            classname: 'org.scalatest.tools.ScalaTestAntTask',
+            classpath: sourceSets.test.runtimeClasspath.asPath
+    )
+    ant.scalatest(runpath: sourceSets.test.output.classesDir,
+            haltonfailure: 'true', fork: 'false') {
+        reporter(type: 'stdout')
+    }
 }

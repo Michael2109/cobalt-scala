@@ -1,13 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db30762c-314e-4049-aa49-7ac51f885ad7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+    <list default="true" id="db30762c-314e-4049-aa49-7ac51f885ad7" name="Default" comment="Added a scala test for arithmetic">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/scala/ArithmeticTest.scala" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/cache.properties.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileHashes.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileSnapshots.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/taskArtifacts.bin" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/cobalt_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/cobalt_main.iml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala" afterPath="$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$alias$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$alias.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$arguments$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$arguments.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$attributes$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$attributes.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$boolop$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$boolop$And$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$boolop$Or$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$boolop.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$Eq$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$Gt$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$GtE$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$In$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$Is$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$IsNot$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$Lt$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$LtE$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$NotEq$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop$NotIn$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$cmpop.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$comprehension$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$comprehension.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$excepthandler$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$excepthandler$ExceptHandler$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$excepthandler$ExceptHandler.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$excepthandler.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Attribute$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Attribute.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$BinOp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$BinOp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$BoolOp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$BoolOp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Call$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Call.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Compare$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Compare.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Dict$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Dict.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$DictComp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$DictComp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$GeneratorExp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$GeneratorExp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$IfExp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$IfExp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Lambda$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Lambda.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$List$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$List.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$ListComp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$ListComp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Name$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Name.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Num$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Num.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Repr$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Repr.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Set$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Set.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$SetComp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$SetComp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Str$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Str.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Subscript$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Subscript.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Tuple$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Tuple.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$UnaryOp$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$UnaryOp.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Yield$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr$Yield.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context$AugLoad$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context$AugStore$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context$Del$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context$Load$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context$Param$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context$Store$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$expr_context.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$identifier$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$identifier.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$keyword$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$keyword.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod$Expression$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod$Expression.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod$Interactive$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod$Interactive.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod$Module$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod$Module.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$mod.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$Add$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$BitAnd$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$BitOr$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$BitXor$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$Div$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$FloorDiv$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$LShift$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$Mod$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$Mult$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$Pow$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$RShift$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator$Sub$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$operator.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$Ellipsis$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$ExtSlice$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$ExtSlice.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$Index$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$Index.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$Slice$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice$Slice.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$slice.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Assert$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Assert.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Assign$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Assign.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$AugAssign$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$AugAssign.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Break$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$ClassDef$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$ClassDef.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Continue$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Delete$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Delete.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Exec$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Exec.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Expr$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Expr.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$For$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$For.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Global$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Global.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$If$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$If.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Import$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Import.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$ImportFrom$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$ImportFrom.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$MethodDef$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$MethodDef.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Pass$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Print$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Print.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Raise$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Raise.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Return$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$Return.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$TryExcept$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$TryExcept.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$TryFinally$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$TryFinally.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$While$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$While.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$With$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$With.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$attributes$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt$attributes.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$stmt.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$unaryop$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$unaryop$Invert$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$unaryop$Not$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$unaryop$UAdd$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$unaryop$USub$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast$unaryop.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/ast/Ast.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/ExpressionParser$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/ExpressionParser.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/IndentationTest$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/IndentationTest$Parser.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/IndentationTest.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/LexicalParser$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/LexicalParser.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/Main$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/Main.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/StatementParser$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/StatementParser.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/Statements$$anonfun$$nestedInanonfun$indentedBlock$10$1.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/Statements.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/WsApi$.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/classes/main/cobalt/parser/WsApi.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/libs/cobalt-1.0-SNAPSHOT.jar" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/scala/compilerAnalysis/compileScala.analysis" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/scala/compilerAnalysis/compileScala.analysis.relations" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -24,13 +219,68 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cobalt" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cobalt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cobalt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cobalt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="documentation" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cobalt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="help" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cobalt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="cobalt" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Main.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/Main.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#751#787#0" expanded="true" />
@@ -39,13 +289,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatementParser.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StatementParser.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="107" column="72" lean-forward="true" selection-start-line="107" selection-start-column="72" selection-end-line="107" selection-end-column="72" />
+            <state relative-caret-position="113">
+              <caret line="90" column="42" lean-forward="false" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
               <folding>
                 <element signature="e#23#47#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2058">
+              <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArithmeticTest.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/scala/ArithmeticTest.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="22" column="3" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -54,8 +326,8 @@
       <file leaf-file-name="ExpressionParser.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="50" column="35" lean-forward="true" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+            <state relative-caret-position="315">
+              <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
               <folding>
                 <element signature="e#23#47#0" expanded="true" />
               </folding>
@@ -73,11 +345,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="378">
+              <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -86,8 +358,8 @@
       <file leaf-file-name="AST.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="197">
+              <caret line="84" column="30" lean-forward="false" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -97,7 +369,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="504">
-              <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+              <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -114,11 +386,11 @@
       <find>method</find>
       <find>Ast.Statement</find>
       <find>methodDef</find>
-      <find>c</find>
       <find>&quot;print</find>
       <find>NAME</find>
-      <find>statement</find>
+      <find>c</find>
       <find>var</find>
+      <find>statement</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -225,6 +497,10 @@
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="scalaTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Initializes a new Gradle build. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="init" />
@@ -325,9 +601,9 @@
         <entry key="$PROJECT_DIR$/../Intellij Projects/2D Game" value="7387188988479" />
         <entry key="$PROJECT_DIR$/../Rest-Service" value="2964292438186" />
         <entry key="$PROJECT_DIR$/../cobalt" value="2973545364357" />
-        <entry key="$PROJECT_DIR$" value="4586321320313" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="2687712183" />
-        <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="1843517153" />
+        <entry key="$PROJECT_DIR$" value="4586341947220" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="2298822746" />
+        <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="1979977391" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="3873626679" />
         <entry key="$PROJECT_DIR$/../evolution" value="2988741517293" />
         <entry key="$PROJECT_DIR$/../game" value="2989741651259" />
@@ -353,67 +629,125 @@
               <option name="name" value="cobalt" />
               <option name="projectBuildClasspath">
                 <list>
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/ant-1.9.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/ant-launcher-1.9.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-base-services-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-base-services-groovy-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-cli-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-core-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-docs-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-installation-beacon-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-launcher-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-messaging-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-model-core-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-model-groovy-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-native-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-open-api-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-resources-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-tooling-api-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-ui-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/gradle-wrapper-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/groovy-all-2.4.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-announce-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-antlr-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-build-comparison-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-build-init-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-code-quality-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-dependency-management-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-diagnostics-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-ear-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-ide-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-ide-native-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-ivy-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-jacoco-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-javascript-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-jetty-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-language-groovy-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-language-java-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-language-jvm-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-language-native-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-language-scala-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-maven-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-osgi-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-platform-base-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-platform-jvm-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-platform-native-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-platform-play-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-plugin-development-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-plugin-use-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-plugins-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-publish-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-reporting-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-resources-http-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-resources-s3-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-resources-sftp-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-scala-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-signing-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-sonar-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-test-kit-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-testing-base-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-testing-jvm-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-testing-native-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/gradle-tooling-api-builders-2.13.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-bin/4xsgxlfjcxvrea7akf941nvc7/gradle-2.13/lib/plugins/ivy-2.2.0.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/announce" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/antlr" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/base-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/base-services-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/build-comparison" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/build-init" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/cli" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/code-quality" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/dependency-management" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/diagnostics" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/ear" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/ide" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/ide-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/installation-beacon" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/internal-integ-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/internal-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/ivy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/jacoco" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/javascript" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/jetty" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/language-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/language-java" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/language-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/language-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/language-scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/launcher" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/maven" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/messaging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/model-core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/model-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/open-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/osgi" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/platform-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/platform-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/platform-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/platform-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/plugin-development" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/plugin-use" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/plugins" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/publish" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/reporting" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/resources" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/resources-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/resources-s3" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/resources-sftp" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/signing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/sonar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/test-kit" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/testing-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/testing-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/testing-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/tooling-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/tooling-api-builders" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/ui" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/src/wrapper" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/ant-1.9.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/ant-launcher-1.9.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-base-services-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-base-services-groovy-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-cli-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-core-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-docs-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-installation-beacon-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-launcher-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-messaging-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-model-core-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-model-groovy-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-native-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-open-api-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-resources-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-tooling-api-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-ui-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/gradle-wrapper-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/groovy-all-2.4.4.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-announce-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-antlr-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-build-comparison-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-build-init-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-code-quality-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-dependency-management-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-diagnostics-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-ear-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-ide-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-ide-native-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-ivy-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-jacoco-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-javascript-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-jetty-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-language-groovy-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-language-java-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-language-jvm-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-language-native-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-language-scala-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-maven-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-osgi-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-platform-base-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-platform-jvm-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-platform-native-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-platform-play-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-plugin-development-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-plugin-use-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-plugins-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-publish-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-reporting-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-resources-http-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-resources-s3-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-resources-sftp-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-scala-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-signing-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-sonar-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-test-kit-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-testing-base-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-testing-jvm-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-testing-native-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/gradle-tooling-api-builders-2.13.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-2.13-all/1b9wlm73elu4cqnbc0rk7r7qn/gradle-2.13/lib/plugins/ivy-2.2.0.jar" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/java" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/groovy" />
                 </list>
@@ -435,7 +769,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/Main.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/ast/statement.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/ast/Statement.scala" />
@@ -443,6 +776,10 @@
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/Test.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/ArithmeticTest.scala" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -500,40 +837,7 @@
               <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
               <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="scala" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="scala" type="462c0819:PsiDirectoryNode" />
-              <item name="cobalt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="scala" type="462c0819:PsiDirectoryNode" />
-              <item name="cobalt" type="462c0819:PsiDirectoryNode" />
-              <item name="ast" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cobalt" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cobalt-lang" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="scala" type="462c0819:PsiDirectoryNode" />
-              <item name="cobalt" type="462c0819:PsiDirectoryNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -563,7 +867,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.cobalt-lang [scalaTest]">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -602,6 +906,62 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+    </configuration>
+    <configuration name="cobalt-lang [scalaTest]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="scalaTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    </configuration>
+    <configuration name="cobalt-lang [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    </configuration>
+    <configuration name="ArithmeticTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="cobalt_test" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ArithmeticTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -663,14 +1023,23 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ArithmeticTest" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.cobalt-lang [test]" />
+      <item index="3" class="java.lang.String" itemvalue="Gradle.cobalt-lang [scalaTest]" />
+    </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Gradle.cobalt-lang [scalaTest]" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ArithmeticTest" />
+        <item index="2" class="java.lang.String" itemvalue="Gradle.cobalt-lang [test]" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1528837675333" />
+    <option name="lastUpdateTimestamp" value="1528843439111" />
     <option name="externalProjectsViewState">
       <projects_view />
     </option>
@@ -715,12 +1084,50 @@
       <option name="project" value="LOCAL" />
       <updated>1528839478485</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added println statement.">
+      <created>1528840777926</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1528840777926</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="ArithmeticTest - 2018.06.12 at 23h 39m 18s.xml">
+      <configuration name="ArithmeticTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ArithmeticTest - 2018.06.12 at 23h 39m 46s.xml">
+      <configuration name="ArithmeticTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 39m 06s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 39m 39s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 42m 54s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 42m 58s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 43m 40s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 43m 45s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 43m 52s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
+    <history-entry file="cobalt-lang_[test] - 2018.06.12 at 23h 43m 57s.xml">
+      <configuration name="cobalt-lang [test]" configurationId="GradleRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -741,12 +1148,12 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25198728" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25198728" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298887" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -765,7 +1172,8 @@
     <MESSAGE value="Updated ignored files." />
     <MESSAGE value="Restructured files." />
     <MESSAGE value="Added parsing field type with method definitions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added parsing field type with method definitions." />
+    <MESSAGE value="Added println statement." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added println statement." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -826,18 +1234,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/Main.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#751#787#0" expanded="true" />
@@ -853,39 +1253,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/ExpressionParser.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="50" column="35" lean-forward="true" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+        <state relative-caret-position="315">
+          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
           <folding>
             <element signature="e#23#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/LexicalParser.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="24" column="41" lean-forward="true" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/ast/AST.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="197">
+          <caret line="84" column="30" lean-forward="false" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/cobalt/parser/StatementParser.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="107" column="72" lean-forward="true" selection-start-line="107" selection-start-column="72" selection-end-line="107" selection-end-column="72" />
+        <state relative-caret-position="113">
+          <caret line="90" column="42" lean-forward="false" selection-start-line="90" selection-start-column="42" selection-end-line="90" selection-end-column="42" />
           <folding>
             <element signature="e#23#47#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/ArithmeticTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="3" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2058">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
