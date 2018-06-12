@@ -1,22 +1,21 @@
 package cobalt.parser
 
-import fastparse.WhitespaceApi
-import fastparse.all._
+
 
 object IndentationTest {
 
-/*
+  import fastparse.WhitespaceApi
+
   val White = WhitespaceApi.Wrapper{
     import fastparse.all._
     NoTrace(" ".rep)
   }
-  import fastparse.noApi._
 
-*/
+  import fastparse.noApi._
 
   class Parser(indent: Int) {
 
-    //import White._
+    import White._
 
     val word: P[String] = P("example".!)
 
@@ -24,9 +23,11 @@ object IndentationTest {
 
     val number: P[String] = P(CharIn('0' to '9').rep(1).!)
 
-    val blockBody: P[Seq[String]] = P("\n").flatMap(i => new Parser(0).number.rep())
+    val blockBody: P[Seq[String]] = {
+      P("\n").flatMap(i => new Parser(0).number.rep())
+    }
 
-    val deeper: P[Int] = P(" ".rep(indent + 0).!.map(_.length))
+    val deeper: P[Int] = P(" ".rep(indent + 1).!.map(_.length))
 
     val section: P[(String, Seq[String])] = P(word ~ blockBody ~ End)
   }
