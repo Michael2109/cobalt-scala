@@ -18,8 +18,12 @@
 
 package cobalt
 
+import java.io.File
+
 import cobalt.parser.StatementParser
 import fastparse.core.Parsed
+
+import scala.sys.SystemProperties
 
 object Main
 {

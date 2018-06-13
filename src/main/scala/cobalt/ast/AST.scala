@@ -21,7 +21,7 @@ object Ast{
 
   sealed trait stmt
   object stmt{
-    case class MethodDef(name: identifier, fields: Fields, body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
+    case class MethodDef(name: identifier, fields: Fields, returnType: Option[Ast.identifier], body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
     case class ClassDef(name: identifier, bases: Seq[expr], body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
     case class Return(value: Option[expr]) extends stmt
 

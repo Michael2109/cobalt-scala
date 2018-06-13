@@ -52,8 +52,8 @@ class Statements(indent: Int) {
     }
 
 
-  val methodDef: P[Seq[Ast.expr] => Ast.stmt.MethodDef] = P(LexicalParser.kw("let") ~ name ~ parameters ~/ "=" ~~ indentedBlock).map {
-    case (name, args, suite) => Ast.stmt.MethodDef(name, args, suite, _)
+  val methodDef: P[Seq[Ast.expr] => Ast.stmt.MethodDef] = P(LexicalParser.kw("let") ~ name ~ parameters ~ (":" ~ name).? ~/ "=" ~~ indentedBlock).map {
+    case (name, args, returnType, suite) => Ast.stmt.MethodDef(name, args, returnType, suite, _)
   }
   val parameters: P[Ast.Fields] = P("(" ~ fields ~ ")")
 
@@ -65,7 +65,7 @@ class Statements(indent: Int) {
       import_stmt | global_stmt | exec_stmt | assert_stmt | assignment
   )
   val assignment: P[Ast.stmt] = {
-    P(LexicalParser.kw("let") ~ name ~ "=" ~/ expr).map(x => Ast.stmt.Assign(x._1, scala.None, true, x._2))
+    P(LexicalParser.kw("let") ~ "mutable".!.? ~ name ~ (":" ~ name).? ~ "=" ~/ expr).map(x => Ast.stmt.Assign(x._2, x._3, x._1.isEmpty, x._4))
   }
 
 /*  val expr_stmt: P[Ast.stmt] = {
