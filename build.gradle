@@ -78,7 +78,7 @@ sourceSets {
             srcDirs = ['src/test/scala']
         }
         resources {
-            srcDir 'resources'
+            srcDir 'src/test/resources'
         }
 
 

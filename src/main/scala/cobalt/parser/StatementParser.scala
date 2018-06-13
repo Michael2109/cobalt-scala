@@ -52,7 +52,7 @@ class Statements(indent: Int) {
     }
 
 
-  val methodDef: P[Seq[Ast.expr] => Ast.stmt.MethodDef] = P(LexicalParser.kw("let") ~/ name ~ parameters ~ "=" ~~ indentedBlock).map {
+  val methodDef: P[Seq[Ast.expr] => Ast.stmt.MethodDef] = P(LexicalParser.kw("let") ~ name ~ parameters ~/ "=" ~~ indentedBlock).map {
     case (name, args, suite) => Ast.stmt.MethodDef(name, args, suite, _)
   }
   val parameters: P[Ast.Fields] = P("(" ~ fields ~ ")")
@@ -62,9 +62,13 @@ class Statements(indent: Int) {
   val simple_stmt: P[Seq[Ast.stmt]] = P(small_stmt.rep(1, sep = ";") ~ ";".?)
   val small_stmt: P[Ast.stmt] = P(
     print_stmt | del_stmt | pass_stmt | flow_stmt |
-      import_stmt | global_stmt | exec_stmt | assert_stmt | expr_stmt
+      import_stmt | global_stmt | exec_stmt | assert_stmt | assignment
   )
-  val expr_stmt: P[Ast.stmt] = {
+  val assignment: P[Ast.stmt] = {
+    P(LexicalParser.kw("let") ~ name ~ "=" ~/ expr).map(x => Ast.stmt.Assign(x._1, scala.None, true, x._2))
+  }
+
+/*  val expr_stmt: P[Ast.stmt] = {
     val aug = P(testlist ~ augassign ~ (yield_expr | testlist.map(tuplize)))
     val assign = P(testlist ~ ("=" ~ (yield_expr | testlist.map(tuplize))).rep)
 
@@ -75,7 +79,7 @@ class Statements(indent: Int) {
           case (a, b) => Ast.stmt.Assign(Seq(tuplize(a)) ++ b.init, b.last)
         }
     )
-  }
+  }*/
 
   val augassign: P[Ast.operator] = P(
     "+=".!.map(_ => Ast.operator.Add) |

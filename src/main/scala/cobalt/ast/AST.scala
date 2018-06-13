@@ -26,7 +26,7 @@ object Ast{
     case class Return(value: Option[expr]) extends stmt
 
     case class Delete(targets: Seq[expr]) extends stmt
-    case class Assign(targets: Seq[expr], value: expr) extends stmt
+    case class Assign(id: identifier, `type`: Option[identifier], immutable: Boolean, e: expr) extends stmt
     case class AugAssign(target: expr, op: operator, value: expr) extends stmt
 
     // not sure if bool allowed: is, can always use int
