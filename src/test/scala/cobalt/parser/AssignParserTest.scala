@@ -18,7 +18,7 @@ class AssignParserTest extends FunSpec with Matchers
 
   describe("Assignment parser")
   {
-    it("Should parse assignment")
+/*    it("Should parse assignment")
     {
       TestUtil.parse("let x = 10", StatementParser.stmt) shouldBe ArrayBuffer(Assign(identifier("x"),None,true,Num(10)))
     }
@@ -31,7 +31,7 @@ class AssignParserTest extends FunSpec with Matchers
     it("Should parse with type defined")
     {
       TestUtil.parse("let x: Int = 10", StatementParser.stmt) shouldBe ArrayBuffer(Assign(identifier("x"),Some(identifier("Int")),true,Num(10)))
-    }
+    }*/
 
     // TODO "let x: Int = do"
     //      "  x"

@@ -82,7 +82,7 @@ object Ast{
     case class Yield(value: Option[expr]) extends expr
     // need sequences for compare to distinguish between
     // x < 4 < 3 and (x < 4) < 3
-    case class Compare(left: expr, ops: Seq[cmpop], comparators: Seq[expr]) extends expr
+    case class Compare(left: expr, ops: Seq[operator], comparators: Seq[expr]) extends expr
     case class Call(func: expr, args: Seq[expr], keywords: Seq[keyword], starargs: Option[expr], kwargs: Option[expr]) extends expr
     case class Repr(value: expr) extends expr
     case class Num(n: Any) extends expr // a number as a PyObject.
@@ -138,6 +138,17 @@ object Ast{
     case object BitXor  extends operator
     case object BitAnd  extends operator
     case object FloorDiv extends operator
+
+    case object Eq extends operator
+    case object NotEq extends operator
+    case object Lt extends operator
+    case object LtE extends operator
+    case object Gt extends operator
+    case object GtE extends operator
+    case object Is extends operator
+    case object IsNot extends operator
+    case object In extends operator
+    case object NotIn extends operator
   }
 
   sealed trait unaryop
@@ -147,20 +158,6 @@ object Ast{
     case object Not extends unaryop
     case object UAdd extends unaryop
     case object USub extends unaryop
-  }
-  sealed trait cmpop
-  object cmpop{
-
-    case object Eq extends cmpop
-    case object NotEq extends cmpop
-    case object Lt extends cmpop
-    case object LtE extends cmpop
-    case object Gt extends cmpop
-    case object GtE extends cmpop
-    case object Is extends cmpop
-    case object IsNot extends cmpop
-    case object In extends cmpop
-    case object NotIn extends cmpop
   }
 
   case class comprehension(target: expr, iter: expr, ifs: Seq[expr])
