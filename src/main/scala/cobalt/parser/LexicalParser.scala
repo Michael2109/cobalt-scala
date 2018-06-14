@@ -1,6 +1,7 @@
 package cobalt.parser
 
-import cobalt.ast.Ast
+import cobalt.ast.ASTNew.{Identifier, Name}
+import cobalt.ast.{ASTNew, Ast}
 
 object WsApi extends fastparse.WhitespaceApi.Wrapper(LexicalParser.wscomment)
 
@@ -14,8 +15,8 @@ object LexicalParser {
   val wscomment = P((CharsWhileIn(" \n") | LexicalParser.comment | "\\\n").rep)
   val nonewlinewscomment = P((CharsWhileIn(" ") | LexicalParser.comment | "\\\n").rep)
 
-  val identifier: P[Ast.identifier] =
-    P((letter | "_") ~ (letter | digit | "_").rep).!.filter(!keywordList.contains(_)).map(Ast.identifier)
+  val identifier: P[String] =
+    P((letter | "_") ~ (letter | digit | "_").rep).!.filter(!keywordList.contains(_))
   val letter = P(lowercase | uppercase)
   val lowercase = P(CharIn('a' to 'z'))
   val uppercase = P(CharIn('A' to 'Z'))

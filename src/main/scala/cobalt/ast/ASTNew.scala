@@ -64,22 +64,23 @@ object ASTNew {
   // TODO Update args
   trait Expression
   case class BlockExpr(expressions: Seq[Expression]) extends Expression
-  case class Identifier() extends Expression
+  case class Identifier(name: Name) extends Expression
   case class MethodCall() extends Expression
   case class NewClassInstance() extends Expression
-  case class StringLiteral() extends Expression
+  case class StringLiteral(value: String) extends Expression
   case class Ternary() extends Expression
   case class Tuple() extends Expression
   case class BoolConst() extends Expression
   case class Not() extends Expression
-  case class BBinary() extends Expression
-  case class RBinary() extends Expression
-  case class IntConst() extends Expression
-  case class DoubleConst() extends Expression
-  case class FloatConst() extends Expression
-  case class LongConst() extends Expression
-  case class Neg() extends Expression
-  case class ABinary() extends Expression
+  case class ABinary(op: ABinOp, expression1: Expression, expression2: Expression) extends Expression
+  case class BBinary(op: BBinOp, expression1: Expression, expression2: Expression) extends Expression
+  case class RBinary(op: RBinOp, expression1: Expression, expression2: Expression) extends Expression
+  case class IntConst(value: Int) extends Expression
+  case class DoubleConst(value: Double) extends Expression
+  case class FloatConst(value: Float) extends Expression
+  case class LongConst(value: Long) extends Expression
+  case class Neg(expression: Expression) extends Expression
+
   case class Array() extends Expression
   case class SpecialRefAsExpr() extends Expression
 
@@ -101,21 +102,24 @@ object ASTNew {
 
   case class Case(expression: Expression, block: Block)
 
-  trait BBinOp
+  trait Operator
+
+  trait BBinOp extends Operator
   case class And() extends BBinOp
   case class Or() extends BBinOp
 
-  trait ABinOp
+  trait ABinOp extends Operator
   case class Add() extends ABinOp
   case class Subtract() extends ABinOp
   case class Multiply() extends ABinOp
   case class Divide() extends ABinOp
 
-  trait RBinOp
+  trait RBinOp extends Operator
   case class GreaterEqual() extends RBinOp
   case class Greater() extends RBinOp
   case class LessEqual() extends RBinOp
   case class Less() extends RBinOp
+  case class Equal() extends RBinOp
 
 
 }
