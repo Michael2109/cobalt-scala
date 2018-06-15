@@ -1,7 +1,6 @@
 package cobalt.parser
 
-import cobalt.ast.ASTNew.{Identifier, Name}
-import cobalt.ast.{ASTNew, Ast}
+import cobalt.ast.ASTNew
 
 object WsApi extends fastparse.WhitespaceApi.Wrapper(LexicalParser.wscomment)
 

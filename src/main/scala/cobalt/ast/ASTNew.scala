@@ -1,7 +1,5 @@
 package cobalt.ast
 
-import cobalt.ast.Ast.stmt.Import
-
 object ASTNew {
 
   case class Module(header: ModuleHeader, models: Seq[Model])

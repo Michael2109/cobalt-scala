@@ -12,26 +12,12 @@ object ExpressionParserNew {
   val stringLiteral: P[StringLiteral] = LexicalParser.stringliteral.map(x => StringLiteral(x))
 
   val expression: P[Expression] = P(Chain(rExpr, and | or))
-  val rExpr: P[Expression] = P(Chain(arith_expr, LtE | Lt | GtE | Gt))
-  //val xor_expr: P[Expr] = P(Chain(bitAndExpr, BitXor))
-  //val bitAndExpr: P[Expr] = P(Chain(shift_expr, BitAnd))
-  //val shift_expr: P[Expr] = P(Chain(arith_expr, LShift | RShift))
+  private val rExpr: P[Expression] = P(Chain(arith_expr, LtE | Lt | GtE | Gt))
+  private val arith_expr: P[Expression] = P(Chain(term, add | subtract))
+  private val term: P[Expression] = P(Chain(allExpressions, multiply | divide ))
+  private val parens: P[Expression] = P( "(" ~ (expression) ~ ")" )
 
-  val arith_expr: P[Expression] = P(Chain(term, add | subtract))
-  val term: P[Expression] = P(Chain(allExpressions, multiply | divide /*| Mod | FloorDiv*/))
-
-  val parens: P[Expression] = P( "(" ~ (expression) ~ ")" )
-
-  val allExpressions = number | name | stringLiteral | parens
-/*
-
-  private def subtract(): Parser[Expr] = add() ~ ("-" ~ add()).rep.map(x => x)
-  private def add(): Parser[Expr] = multiply() ~ rep("+" ~ multiply()) ^^ { case f1 ~ fs ⇒ (f1 /: fs)((f,fn) => new Add(f, fn._2)) }
-  private def multiply(): Parser[Expr] = divide() ~ rep("*" ~ divide()) ^^ { case f1 ~ fs ⇒ (f1 /: fs)((f,fn) => new Multiply(f, fn._2)) }
-  private def divide(): Parser[Expr] = (parentheses ~ rep("/" ~ parentheses())) ^^ { case f1 ~ fs ⇒ (f1 /: fs)((f,fn) => new Divide(f, fn._2)) }
-  private def parentheses(): Parser[Expr] = identifier() | floatConstant() | ("(" ~ add ~ ")" ^^ { case "(" ~ exp ~ ")" ⇒ exp })
-*/
-
+  private val allExpressions = number | name | stringLiteral | parens
 
   def Chain(p: P[Expression], op: P[ASTNew.Operator]) = P(p ~ (op ~ p).rep).map {
     case (lhs, chunks) =>
