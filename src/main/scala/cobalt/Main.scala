@@ -1,24 +1,6 @@
-/*
- * Cobalt Programming Language Compiler
- * Copyright (C) 2017 Michael Haywood
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package cobalt
 
-import cobalt.parser.ExpressionParserNew
+import cobalt.parser.StatementParserNew
 import fastparse.core.Parsed
 
 object Main
@@ -26,21 +8,17 @@ object Main
   import sext._
 
   def parse(str: String) = {
-    val Parsed.Success(value, _) = ExpressionParserNew.expressionParser.parse(str)
-    println(value.treeString)
+    StatementParserNew.statement.parse(str) match {
+      case Parsed.Success(a, b) => println(a + " : " + b)
+      case Parsed.Failure(a, b, c)  => println(a + " : " + b + " : " + c)
+    }
   }
 
   def main(args: Array[String]) =
   {
     def code =
-      """let functionname( parameters: Int )= do
-        |  if true then
-        |    10
-        |  elif false then
-        |    15
-        |  else
-        |    20
-        |
+      """if(true)
+        | test
       """.stripMargin.trim.replace("\r", "")
 
     println("Code:")

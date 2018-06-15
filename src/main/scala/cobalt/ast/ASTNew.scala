@@ -85,15 +85,15 @@ object ASTNew {
   trait Statement
   case class For() extends Statement
   case class While() extends Statement
-  case class If() extends Statement
+  case class If(condition: Expression, ifBlock: Statement, elseBlock: Statement) extends Statement
   case class Assign() extends Statement
   case class AssignMultiple() extends Statement
   case class Reassign() extends Statement
   case class Return() extends Statement
   case class Lambda() extends Statement
   case class ModelDef() extends Statement
-  case class ExprAsStmt() extends Statement
-  case class BlockStmt() extends Statement
+  case class ExprAsStmt(expression: Expression) extends Statement
+  case class BlockStmt(statements: Seq[Statement]) extends Statement
   case class Match() extends Statement
   case class Print() extends Statement
   case class Println() extends Statement
