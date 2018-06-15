@@ -1,3 +1,4 @@
+/*
 package cobalt.ast
 
 /**
@@ -179,3 +180,4 @@ object Ast{
   // import name with optional 'as' alias.
   case class alias(name: identifier, asname: Option[identifier])
 }
+*/

@@ -104,22 +104,21 @@ object ASTNew {
 
   trait Operator
 
-  trait BBinOp extends Operator
-  case class And() extends BBinOp
-  case class Or() extends BBinOp
-
   trait ABinOp extends Operator
-  case class Add() extends ABinOp
-  case class Subtract() extends ABinOp
-  case class Multiply() extends ABinOp
-  case class Divide() extends ABinOp
+  case object Add extends ABinOp
+  case object Subtract extends ABinOp
+  case object Multiply extends ABinOp
+  case object Divide extends ABinOp
+
+  trait BBinOp extends Operator
+  case object And extends BBinOp
+  case object Or extends BBinOp
 
   trait RBinOp extends Operator
-  case class GreaterEqual() extends RBinOp
-  case class Greater() extends RBinOp
-  case class LessEqual() extends RBinOp
-  case class Less() extends RBinOp
-  case class Equal() extends RBinOp
-
+  case object GreaterEqual extends RBinOp
+  case object Greater extends RBinOp
+  case object LessEqual extends RBinOp
+  case object Less extends RBinOp
+  case object Equal extends RBinOp
 
 }

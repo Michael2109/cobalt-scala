@@ -18,7 +18,11 @@ object ExpressionParserNew {
   //val shift_expr: P[Expr] = P(Chain(arith_expr, LShift | RShift))
 
   val arith_expr: P[Expression] = P(Chain(term, add | subtract))
-  val term: P[Expression] = P(Chain(number, multiply | divide /*| Mod | FloorDiv*/))
+  val term: P[Expression] = P(Chain(allExpressions, multiply | divide /*| Mod | FloorDiv*/))
+
+  val parens: P[Expression] = P( "(" ~ (expression) ~ ")" )
+
+  val allExpressions = number | name | stringLiteral | parens
 /*
 
   private def subtract(): Parser[Expr] = add() ~ ("-" ~ add()).rep.map(x => x)
@@ -65,21 +69,21 @@ object ExpressionParserNew {
 //  val LShift = op("<<", Ast.operator.LShift)
 //  val RShift = op(">>", Ast.operator.RShift)
   val Lt = op("<", ASTNew.Less)
-  val Gt = op(">", ASTNew.Greater)
-  val Eq = op("==", ASTNew.Equal)
-  val GtE = op(">=", ASTNew.GreaterEqual)
-  val LtE = op("<=", ASTNew.LessEqual)
+  val Gt = op(">", ASTNew.Greater.asInstanceOf[Operator])
+  val Eq = op("==", ASTNew.Equal.asInstanceOf[Operator])
+  val GtE = op(">=", ASTNew.GreaterEqual.asInstanceOf[Operator])
+  val LtE = op("<=", ASTNew.LessEqual.asInstanceOf[Operator])
 //  val NotEq = op("<>" | "!=", Ast.operator.NotEq)
 //  val In = op("in", Ast.operator.In)
 //  val NotIn = op("not" ~ "in", Ast.operator.NotIn)
 //  val Is = op("is", Ast.operator.Is)
 //  val IsNot = op("is" ~ "not", Ast.operator.IsNot)
   val comp_op = P(LtE | GtE | Eq | Gt | Lt /*| NotEq | In | NotIn | IsNot | Is*/)
-  val add = op("+", ASTNew.Add)
-  val subtract = op("-", ASTNew.Subtract)
+  val add = op("+", ASTNew.Add.asInstanceOf[Operator])
+  val subtract = op("-", ASTNew.Subtract.asInstanceOf[Operator])
 //  val Pow = op("**", Ast.operator.Pow)
-  val multiply = op("*", ASTNew.Multiply)
-  val divide = op("/", ASTNew.Divide)
+  val multiply = op("*", ASTNew.Multiply.asInstanceOf[Operator])
+  val divide = op("/", ASTNew.Divide.asInstanceOf[Operator])
 //  val Mod = op("%", Ast.operator.Mod)
 //  val FloorDiv = op("//", Ast.operator.FloorDiv)
 //  val BitOr = op("|", Ast.operator.BitOr)
@@ -90,6 +94,6 @@ object ExpressionParserNew {
 //  val Invert = op("~", Ast.unaryop.Invert)
   // val unary_op = P(UAdd | USub | Invert)
 
-  val and = op("&&", ASTNew.And)
-  val or = op("||", ASTNew.Or)
+  val and = op("&&", ASTNew.And.asInstanceOf[Operator])
+  val or = op("||", ASTNew.Or.asInstanceOf[Operator])
 }

@@ -1,9 +1,6 @@
 package cobalt.parser
 
-import cobalt.ast.Ast.expr.{BinOp, Name, Num}
-import cobalt.ast.Ast.expr_context.Load
-import cobalt.ast.Ast.identifier
-import cobalt.ast.Ast.operator.{Add, Div, Mult, Sub}
+import cobalt.ast.ASTNew._
 import cobalt.utils.TestUtil
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
@@ -16,11 +13,11 @@ class AExprParserTest extends FunSpec with Matchers
   {
     it("Should parse integers")
     {
-      TestUtil.parse("1", ExpressionParserNew.expression) shouldBe Num(1)
+      TestUtil.parse("1", ExpressionParserNew.expression) shouldBe IntConst(1)
     }
     it("Should parse negative")
     {
-      TestUtil.parse("-1", ExpressionParserNew.expression) shouldBe Num(-1)
+      TestUtil.parse("-1", ExpressionParserNew.expression) shouldBe IntConst(-1)
     }
   }
 
@@ -28,28 +25,27 @@ class AExprParserTest extends FunSpec with Matchers
   {
     it("Should parse addition")
     {
-      TestUtil.parse("1 + 2", ExpressionParserNew.expression) shouldBe BinOp(Num(1),Add,Num(2))
+      TestUtil.parse("1 + 2", ExpressionParserNew.expression) shouldBe ABinary(Add,IntConst(1),IntConst(2))
     }
     it("Should parse subtract")
     {
-      TestUtil.parse("1 - 2", ExpressionParserNew.expression) shouldBe BinOp(Num(1),Sub,Num(2))
+      TestUtil.parse("1 - 2", ExpressionParserNew.expression) shouldBe ABinary(Subtract,IntConst(1),IntConst(2))
     }
     it("Should parse multiply")
     {
-      TestUtil.parse("1 * 2", ExpressionParserNew.expression) shouldBe BinOp(Num(1),Mult,Num(2))
+      TestUtil.parse("1 * 2", ExpressionParserNew.expression) shouldBe ABinary(Multiply,IntConst(1),IntConst(2))
     }
     it("Should parse divide")
     {
-      TestUtil.parse("1 / 2", ExpressionParserNew.expression) shouldBe BinOp(Num(1),Div,Num(2))
+      TestUtil.parse("1 / 2", ExpressionParserNew.expression) shouldBe ABinary(Divide,IntConst(1),IntConst(2))
     }
     it("Should parse mixed")
     {
-      TestUtil.parse("1 / 100 * 3 + 200 - 4", ExpressionParserNew.expression) shouldBe BinOp(BinOp(BinOp(BinOp(Num(1),Div,Num(100)),Mult,Num(3)),Add,Num(200)),Sub,Num(4))
+      TestUtil.parse("1 / 100 * 3 + 200 - 4", ExpressionParserNew.expression) shouldBe ABinary(Subtract,ABinary(Add,ABinary(Multiply,ABinary(Divide,IntConst(1),IntConst(100)),IntConst(3)),IntConst(200)),IntConst(4))
     }
     it("Should parse parentheses")
     {
-      // TODO
-      // TestUtil.parse("1 / 100 * (2 + 200) - 3", ExpressionParserNew.expression) shouldBe BinOp(BinOp(BinOp(Name(identifier("x"),Load),Div,Num(100)),Mult,BinOp(Name(identifier("y"),Load),Add,Num(200))),Sub,Name(identifier("z"),Load))
+      TestUtil.parse("1 / 100 * (2 + 200) - 3", ExpressionParserNew.expression) shouldBe ABinary(Subtract,ABinary(Multiply,ABinary(Divide,IntConst(1),IntConst(100)),ABinary(Add,IntConst(2),IntConst(200))),IntConst(3))
     }
   }
 }

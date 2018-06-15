@@ -18,19 +18,15 @@
 
 package cobalt
 
-import java.io.File
-
-import cobalt.parser.StatementParser
+import cobalt.parser.ExpressionParserNew
 import fastparse.core.Parsed
-
-import scala.sys.SystemProperties
 
 object Main
 {
   import sext._
 
   def parse(str: String) = {
-    val Parsed.Success(value, _) = StatementParser.stmt.parse(str)
+    val Parsed.Success(value, _) = ExpressionParserNew.expression.parse(str)
     println(value.treeString)
   }
 

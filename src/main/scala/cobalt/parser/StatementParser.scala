@@ -1,3 +1,4 @@
+/*
 package cobalt.parser
 
 import fastparse.noApi._
@@ -206,3 +207,4 @@ class Statements(indent: Int) {
     P("do" ~ indented | " ".rep ~ simple_stmt)
   }
 }
+*/

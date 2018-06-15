@@ -1,3 +1,4 @@
+/*
 package cobalt.parser
 
 import fastparse.noApi._
@@ -199,3 +200,4 @@ object ExpressionParser
   val fpdef: P[Ast.expr] = P( name.map(Ast.expr.Name(_, Ast.expr_context.Param)) | "(" ~ fplist ~ ")" )
   val fplist: P[Ast.expr] = P( fpdef.rep(sep = ",") ~ ",".? ).map(Ast.expr.Tuple(_, Ast.expr_context.Param))
 }
+*/
