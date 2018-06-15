@@ -1,14 +1,8 @@
-package cobalt.parser
+package cobalt.parser.statement
 
-import cobalt.ast.Ast.expr.Num
-import cobalt.ast.Ast.identifier
-import cobalt.ast.Ast.stmt.Assign
-import cobalt.utils.TestUtil
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSpec, Matchers}
-
-import scala.collection.mutable.ArrayBuffer
 
 @RunWith(classOf[JUnitRunner])
 class AssignParserTest extends FunSpec with Matchers

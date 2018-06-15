@@ -1,15 +1,11 @@
-package cobalt.parser
+package cobalt.parser.statement
 
-import cobalt.ast.Ast.expr.Name
-import cobalt.ast.Ast.expr_context.Load
-import cobalt.ast.Ast.identifier
-import cobalt.utils.TestUtil
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSpec, Matchers}
 
 @RunWith(classOf[JUnitRunner])
-class MethodParserTest extends FunSpec with Matchers
+class NameSpaceParserTest extends FunSpec with Matchers
 {
   describe("Method parser")
   {

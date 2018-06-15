@@ -1,6 +1,7 @@
-package cobalt.parser
+package cobalt.parser.expression
 
 import cobalt.ast.ASTNew._
+import cobalt.parser.ExpressionParserNew
 import cobalt.utils.TestUtil
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
