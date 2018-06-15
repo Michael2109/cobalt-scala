@@ -14,11 +14,11 @@ class BExprParserTest extends FunSpec with Matchers
   {
     it("Should parse boolean constant `true`")
     {
-      TestUtil.parse("true", ExpressionParserNew.expression) shouldBe Identifier(Name("true"))
+      TestUtil.parse("true", ExpressionParserNew.expressionParser) shouldBe Identifier(Name("true"))
     }
     it("Should parse boolean constant `false`")
     {
-      TestUtil.parse("false", ExpressionParserNew.expression) shouldBe Identifier(Name("false"))
+      TestUtil.parse("false", ExpressionParserNew.expressionParser) shouldBe Identifier(Name("false"))
     }
   }
 
@@ -26,19 +26,19 @@ class BExprParserTest extends FunSpec with Matchers
   {
     it("Should parse `less than`")
     {
-      TestUtil.parse("x > 10", ExpressionParserNew.expression) shouldBe RBinary(Greater,Identifier(Name("x")),IntConst(10))
+      TestUtil.parse("x > 10", ExpressionParserNew.expressionParser) shouldBe RBinary(Greater,Identifier(Name("x")),IntConst(10))
     }
     it("Should parse `greater than`")
     {
-      TestUtil.parse("x < 10", ExpressionParserNew.expression) shouldBe RBinary(Less,Identifier(Name("x")),IntConst(10))
+      TestUtil.parse("x < 10", ExpressionParserNew.expressionParser) shouldBe RBinary(Less,Identifier(Name("x")),IntConst(10))
     }
     it("Should parse `less than equal`")
     {
-      TestUtil.parse("x >= 10", ExpressionParserNew.expression) shouldBe RBinary(GreaterEqual,Identifier(Name("x")),IntConst(10))
+      TestUtil.parse("x >= 10", ExpressionParserNew.expressionParser) shouldBe RBinary(GreaterEqual,Identifier(Name("x")),IntConst(10))
     }
     it("Should parse `greater than equal`")
     {
-      TestUtil.parse("x <= 10", ExpressionParserNew.expression) shouldBe RBinary(LessEqual,Identifier(Name("x")),IntConst(10))
+      TestUtil.parse("x <= 10", ExpressionParserNew.expressionParser) shouldBe RBinary(LessEqual,Identifier(Name("x")),IntConst(10))
     }
   }
 }

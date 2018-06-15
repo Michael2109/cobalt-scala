@@ -7,19 +7,30 @@ import cobalt.ast.{ASTNew}
 
 object ExpressionParserNew {
 
-  val name: P[ASTNew.Identifier] = LexicalParser.identifier.map(x => Identifier(Name(x)))
-  val number: P[IntConst] = P( LexicalParser.floatnumber | LexicalParser.longinteger | LexicalParser.integer | LexicalParser.imagnumber ).map(x => IntConst(x.toInt))
+  val annotationParser: P[Annotation] = nameParser.map(Annotation)
+
+  val identifierParser: P[ASTNew.Identifier] = LexicalParser.identifier.map(x => Identifier(Name(x)))
+  val nameParser: P[Name] = LexicalParser.identifier.map(x => Name(x))
+  val numberParser: P[IntConst] = P( LexicalParser.floatnumber | LexicalParser.longinteger | LexicalParser.integer | LexicalParser.imagnumber ).map(x => IntConst(x.toInt))
   val stringLiteral: P[StringLiteral] = LexicalParser.stringliteral.map(x => StringLiteral(x))
 
-  val expression: P[Expression] = P(Chain(rExpr, and | or))
-  private val rExpr: P[Expression] = P(Chain(arith_expr, LtE | Lt | GtE | Gt))
-  private val arith_expr: P[Expression] = P(Chain(term, add | subtract))
-  private val term: P[Expression] = P(Chain(allExpressions, multiply | divide ))
-  private val parens: P[Expression] = P( "(" ~ (expression) ~ ")" )
+  val expressionParser: P[Expression] = P(Chain(rExprParser, and | or))
+  private val rExprParser: P[Expression] = P(Chain(arith_exprParser, LtE | Lt | GtE | Gt))
+  private val arith_exprParser: P[Expression] = P(Chain(termParser, add | subtract))
+  private val termParser: P[Expression] = P(Chain(allExpressionsParser, multiply | divide ))
+  private val parensParser: P[Expression] = P( "(" ~ (expressionParser) ~ ")" )
 
-  private val allExpressions = number | name | stringLiteral | parens
+  private val allExpressionsParser = numberParser | identifierParser | stringLiteral | parensParser
 
-  def Chain(p: P[Expression], op: P[ASTNew.Operator]) = P(p ~ (op ~ p).rep).map {
+  def finalModifierParser: P[ASTNew.Final.type] = P("final").map(x => Final)
+
+  def methodCallParser: P[MethodCall] = (nameParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => MethodCall(x._1, BlockExpr(x._2)))
+
+  def newClassInstanceParser: P[NewClassInstance] = ("new" ~ typeRefParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => NewClassInstance(x._1, BlockExpr(x._2), None))
+
+  def typeRefParser: P[Type] = nameParser.map(x => TypeRef(RefLocal(x)))
+
+  private def Chain(p: P[Expression], op: P[ASTNew.Operator]) = P(p ~ (op ~ p).rep).map {
     case (lhs, chunks) =>
       chunks.foldLeft(lhs) { case (lhs, (operator, rhs)) =>
         operator match {
@@ -31,55 +42,17 @@ object ExpressionParserNew {
       }
   }
 
-/*  expressionParser :: Parser Expr
-    expressionParser
-    =   newClassInstanceParser
-  <|> tupleParser
-    <|> parens expressionParser'
-  <|> methodCallParser
-    <|> ternaryParser
-    <|> LongConst <$> longParser
-    <|> FloatConst <$> floatParser
-    <|> DoubleConst <$> doubleParser
-    <|> IntConst <$> integerParser
-    <|> (BoolConst True  <$ rword "True")
-  <|> (BoolConst False <$ rword "False")
-  <|> specialRefAsExprParser
-    <|> identifierParser
-    <|> stringLiteralParser*/
-
-  // Common operators, mapped from their
-  // strings to their type-safe representations
   def op[T](s: P0, rhs: T) = s.!.map(_ => rhs)
-
-//  val LShift = op("<<", Ast.operator.LShift)
-//  val RShift = op(">>", Ast.operator.RShift)
   val Lt = op("<", ASTNew.Less)
   val Gt = op(">", ASTNew.Greater.asInstanceOf[Operator])
   val Eq = op("==", ASTNew.Equal.asInstanceOf[Operator])
   val GtE = op(">=", ASTNew.GreaterEqual.asInstanceOf[Operator])
   val LtE = op("<=", ASTNew.LessEqual.asInstanceOf[Operator])
-//  val NotEq = op("<>" | "!=", Ast.operator.NotEq)
-//  val In = op("in", Ast.operator.In)
-//  val NotIn = op("not" ~ "in", Ast.operator.NotIn)
-//  val Is = op("is", Ast.operator.Is)
-//  val IsNot = op("is" ~ "not", Ast.operator.IsNot)
-  val comp_op = P(LtE | GtE | Eq | Gt | Lt /*| NotEq | In | NotIn | IsNot | Is*/)
+  val comp_op = P(LtE | GtE | Eq | Gt | Lt)
   val add = op("+", ASTNew.Add.asInstanceOf[Operator])
   val subtract = op("-", ASTNew.Subtract.asInstanceOf[Operator])
-//  val Pow = op("**", Ast.operator.Pow)
   val multiply = op("*", ASTNew.Multiply.asInstanceOf[Operator])
   val divide = op("/", ASTNew.Divide.asInstanceOf[Operator])
-//  val Mod = op("%", Ast.operator.Mod)
-//  val FloorDiv = op("//", Ast.operator.FloorDiv)
-//  val BitOr = op("|", Ast.operator.BitOr)
-//  val BitAnd = op("&", Ast.operator.BitAnd)
-//  val BitXor = op("^", Ast.operator.BitXor)
-//  val UAdd = op("+", Ast.unaryop.UAdd)
-//  val USub = op("-", Ast.unaryop.USub)
-//  val Invert = op("~", Ast.unaryop.Invert)
-  // val unary_op = P(UAdd | USub | Invert)
-
   val and = op("&&", ASTNew.And.asInstanceOf[Operator])
   val or = op("||", ASTNew.Or.asInstanceOf[Operator])
 }

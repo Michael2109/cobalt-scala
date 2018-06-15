@@ -47,13 +47,13 @@ object ASTNew {
   case class Method(name: Name, annotations: Seq[Annotation], fields: Seq[Field], modifiers: Seq[Modifier], returnType: Option[Type], body: Block)
 
   trait Modifier
-  case class Public() extends Modifier
-  case class Protected() extends Modifier
-  case class Private() extends Modifier
-  case class PackageLocal() extends Modifier
-  case class Abstract() extends Modifier
-  case class Final() extends Modifier
-  case class Pure() extends Modifier
+  case object Public extends Modifier
+  case object Protected extends Modifier
+  case object Private extends Modifier
+  case object PackageLocal extends Modifier
+  case object Abstract extends Modifier
+  case object Final extends Modifier
+  case object Pure extends Modifier
 
   trait Block
   case class Inline(expression: Expression)
@@ -63,8 +63,8 @@ object ASTNew {
   trait Expression
   case class BlockExpr(expressions: Seq[Expression]) extends Expression
   case class Identifier(name: Name) extends Expression
-  case class MethodCall() extends Expression
-  case class NewClassInstance() extends Expression
+  case class MethodCall(name: Name, expression: Expression) extends Expression
+  case class NewClassInstance(`type`: Type, expression: Expression, anonymousClass: Option[Statement]) extends Expression
   case class StringLiteral(value: String) extends Expression
   case class Ternary() extends Expression
   case class Tuple() extends Expression

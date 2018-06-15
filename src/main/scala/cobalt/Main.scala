@@ -26,7 +26,7 @@ object Main
   import sext._
 
   def parse(str: String) = {
-    val Parsed.Success(value, _) = ExpressionParserNew.expression.parse(str)
+    val Parsed.Success(value, _) = ExpressionParserNew.expressionParser.parse(str)
     println(value.treeString)
   }
 
