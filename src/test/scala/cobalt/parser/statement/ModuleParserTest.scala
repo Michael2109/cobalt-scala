@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 @RunWith(classOf[JUnitRunner])
 class ModuleParserTest extends FunSpec with Matchers
 {
-  describe("Module parser")
+  describe("ModuleIR parser")
   {
     it("Should parse modules")
     {

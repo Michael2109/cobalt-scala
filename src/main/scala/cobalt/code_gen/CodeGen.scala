@@ -1,6 +1,7 @@
 package cobalt.code_gen
 
 import cobalt.ast.AST.{ClassModel, Module, Statement}
+import cobalt.ir.IR.{ClassModelIR, ModuleIR, StatementIR}
 
 import scala.tools.asm._
 import scala.tools.asm.Opcodes;

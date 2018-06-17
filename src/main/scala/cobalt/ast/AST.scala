@@ -1,5 +1,7 @@
 package cobalt.ast
 
+import cobalt.ir.IR.{InitIR, TypeRefIR}
+
 object AST {
 
   case class Module(header: ModuleHeader, models: Seq[Statement])
@@ -15,6 +17,8 @@ object AST {
   case class TypeRef(ref: Ref) extends Type
   case class TypeApp(ref: Ref, types: Seq[Type]) extends Type // Type application, aka Map<A,B> -> `TyApp (RefLocal "Map") [TyRef (RefLocal "A"), TyRef (RefLocal "B")]`
   //case class TypeRel(typeRel: TypeRel, `type1`: Type, `type2`: Type) extends Type // This allows things like <T extends Something> which would be `TyRel Extends (TyRef (RefLocal "T")) (TyRef (RefLocal "Something"))`
+
+  def initToInitIR(init: Init) = InitIR()
 
   trait Ref
   case class RefSpecial(specialRef: SpecialRef) extends Ref
