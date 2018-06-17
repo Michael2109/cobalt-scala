@@ -3,9 +3,7 @@ package cobalt.parser
 
 import fastparse.noApi._
 import WsApi._
-import ExpressionParserNew._
-import cobalt.ast.ASTNew
-import cobalt.ast.ASTNew.{BlockStmt, ExprAsStmt, If, Statement}
+import cobalt.ast.ASTNew._
 
 object StatementParserNew extends Statements(0)
 
@@ -17,10 +15,15 @@ class Statements(indent: Int) {
   val indents = P("\n" ~~ " ".repX(indent))
   val spaces = P((LexicalParser.nonewlinewscomment.? ~~ "\n").repX(1))
 
+  val assignmentParser: P[Assign] = P(LexicalParser.kw("let") ~ ("mutable").!.? ~ ExpressionParserNew.nameParser ~ (":" ~ ExpressionParserNew.typeRefParser).? ~ "=" ~ blockParser).map(x => Assign(x._2, x._3, x._1.isEmpty, x._4))
+
+  val blockParser: P[Block] = ExpressionParserNew.expressionParser.map(Inline) | doBlock
+
+  val doBlock: P[Block] = P(LexicalParser.kw("do")) ~~ indentedBlock.map(DoBlock)
+
   val ifStatementParser: P[Statement] = P(LexicalParser.kw("if") ~ "(" ~ ExpressionParserNew.expressionParser ~ ")" ~~ indentedBlock).map(x => If(x._1, x._2, null))
 
-  // Working P(LexicalParser.kw("if") ~~ indentedBlock.map(x => If(null, x, null))
-  val statement: P[Statement] = P(ifStatementParser | exprAsStmt)
+  val statement: P[Statement] = P(assignmentParser | ifStatementParser | exprAsStmt)
 
   val exprAsStmt: P[Statement] = ExpressionParserNew.expressionParser.map(ExprAsStmt)
 

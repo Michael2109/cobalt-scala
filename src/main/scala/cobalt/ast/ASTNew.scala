@@ -56,8 +56,8 @@ object ASTNew {
   case object Pure extends Modifier
 
   trait Block
-  case class Inline(expression: Expression)
-  case class DoBlock(expression: Statement)
+  case class Inline(expression: Expression) extends Block
+  case class DoBlock(expression: Statement) extends Block
 
   // TODO Update args
   trait Expression
@@ -86,8 +86,8 @@ object ASTNew {
   case class For() extends Statement
   case class While() extends Statement
   case class If(condition: Expression, ifBlock: Statement, elseBlock: Statement) extends Statement
-  case class Assign() extends Statement
-  case class AssignMultiple() extends Statement
+  case class Assign(name: Name, `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
+  case class AssignMultiple(name: Seq[Name], `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
   case class Reassign() extends Statement
   case class Return() extends Statement
   case class Lambda() extends Statement

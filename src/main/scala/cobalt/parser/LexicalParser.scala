@@ -28,7 +28,7 @@ object LexicalParser {
     "break", "except", "import", "print", "println",
     "class", "exec", "in", "raise",
     "continue", "finally", "is", "return",
-    "def", "for", "lambda", "try", "mutable"
+    "for", "lambda", "try", "mutable"
   )
 
   val stringliteral: P[String] = P(stringprefix.? ~ (longstring | shortstring))
