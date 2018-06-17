@@ -22,14 +22,17 @@ object Main
     val moduleCode =
       """package x.y.z
         |class ClassName
-        |  let x(): Int = 1
+        |
+        |  let x(): Int = do
+        |    let x = 1
+        |    let y = 2
       """.stripMargin.replace("\r", "")
     val bos = new BufferedOutputStream(new FileOutputStream("Test.class"))
 
     StatementParser.moduleParser.parse(moduleCode) match
     {
       case Parsed.Success(a, b) => {
-        bos.write(CodeGen.genCode(a))
+        bos.write(CodeGen.genCode(AST.moduleToModuleIR(a)))
         println(a.treeString + " : " + b)
       }
       case Parsed.Failure(a, b, c)  => println(a + " : " + b + " : " + c)

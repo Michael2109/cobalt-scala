@@ -1,6 +1,7 @@
 package cobalt.code_gen
 
-import cobalt.ast.AST.{Block, BlockExpr, BlockStmt, ClassModel, DoBlock, Expression, Inline, IntConst, Method, Module, Statement}
+import cobalt.ast.AST.{Assign, Block, BlockExpr, BlockStmt, ClassModel, DoBlock, Expression, Inline, IntConst, Method, Module, Statement}
+import cobalt.ir.IR._
 
 import scala.tools.asm._
 import scala.tools.asm.Opcodes;
@@ -10,7 +11,7 @@ object CodeGen
 
   val version = 49
 
-  def genCode(module: Module): Array[Byte] =
+  def genCode(module: ModuleIR): Array[Byte] =
   {
     val cw = new ClassWriter(0)
 
@@ -19,11 +20,11 @@ object CodeGen
     cw.toByteArray
   }
 
-  def genCode(cw: ClassWriter, statement: Statement): Unit =
+  def genCode(cw: ClassWriter, statement: StatementIR): Unit =
   {
     statement match
     {
-      case classModel: ClassModel =>
+      case classModel: ClassModelIR =>
       {
         cw.visit(version, Opcodes.ACC_PUBLIC + Opcodes.ACC_SUPER, classModel.name.value, null, "java/lang/Object", null)
         val mv = cw.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null, null)
@@ -34,44 +35,47 @@ object CodeGen
         mv.visitEnd()
         genCode(cw, classModel.body)
       }
-      case method: Method =>
+      case method: MethodIR =>
       {
         val mv = cw.visitMethod(Opcodes.ACC_PUBLIC, method.name.value, "()V", null, null)
         genCode(mv, method.body)
         mv.visitInsn(Opcodes.RETURN)
         mv.visitEnd()
       }
-
     }
   }
 
-  def genCode(mv: MethodVisitor, expression: Expression): Unit =
+  def genCode(mv: MethodVisitor, expression: ExpressionIR): Unit =
   {
     expression match
     {
-      case blockStmt: BlockExpr => blockStmt.expressions.foreach(x => genCode(mv, x))
-      case intConst: IntConst => intConstCodeGen(mv, intConst)
+      case blockStmt: BlockExprIR => blockStmt.expressions.foreach(x => genCode(mv, x))
+      case intConst: IntConstIR => intConstCodeGen(mv, intConst)
     }
   }
 
-  def genCode(mv: MethodVisitor, statement: Statement): Unit =
+  def genCode(mv: MethodVisitor, statement: StatementIR): Unit =
   {
     statement match
     {
-      case blockStmt: BlockStmt => blockStmt.statements.foreach(x => genCode(mv, x))
+      case assign: AssignIR => {
+        genCode(mv, assign.block)
+        mv.visitVarInsn(Opcodes.ISTORE, (math.random() * 100).asInstanceOf[Int])
+      }
+      case blockStmt: BlockStmtIR => blockStmt.statements.foreach(x => genCode(mv, x))
     }
   }
 
-  def genCode(mv: MethodVisitor, block: Block): Unit =
+  def genCode(mv: MethodVisitor, block: BlockIR): Unit =
   {
     block match
     {
-      case inline: Inline => genCode(mv, inline.expression)
-      case doBlock: DoBlock => genCode(mv, doBlock.statement)
+      case doBlock: DoBlockIR => genCode(mv, doBlock.statement)
+      case inline: InlineIR => genCode(mv, inline.expression)
     }
   }
 
-  def intConstCodeGen(mv: MethodVisitor, intConst: IntConst): Unit =
+  def intConstCodeGen(mv: MethodVisitor, intConst: IntConstIR): Unit =
   {
     mv.visitIntInsn(Opcodes.BIPUSH, intConst.value)
   }

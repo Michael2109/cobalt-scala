@@ -92,7 +92,7 @@ object IR {
   case class PrintIR() extends StatementIR
   case class PrintlnIR() extends StatementIR
 
-  case class Case(expression: ExpressionIR, block: BlockIR)
+  case class CaseIR(expression: ExpressionIR, block: BlockIR)
 
   trait OperatorIR
 
