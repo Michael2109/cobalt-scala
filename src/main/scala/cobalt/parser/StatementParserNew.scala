@@ -23,9 +23,9 @@ class Statements(indent: Int) {
 
   val ifStatementParser: P[Statement] = P(LexicalParser.kw("if") ~ "(" ~ ExpressionParserNew.expressionParser ~ ")" ~~ indentedBlock).map(x => If(x._1, x._2, null))
 
-  // val reassignParser: P[Reassign] = P
+  val reassignParser: P[Reassign] = P(ExpressionParserNew.nameParser ~ "<-" ~ blockParser).map(x => Reassign(x._1, x._2))
 
-  val statement: P[Statement] = P(assignParser | ifStatementParser | exprAsStmt)
+  val statement: P[Statement] = P(assignParser | reassignParser | ifStatementParser | exprAsStmt)
 
   val exprAsStmt: P[Statement] = ExpressionParserNew.expressionParser.map(ExprAsStmt)
 

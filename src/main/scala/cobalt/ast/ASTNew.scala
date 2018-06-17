@@ -88,7 +88,7 @@ object ASTNew {
   case class If(condition: Expression, ifBlock: Statement, elseBlock: Statement) extends Statement
   case class Assign(name: Name, `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
   case class AssignMultiple(name: Seq[Name], `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
-  case class Reassign() extends Statement
+  case class Reassign(name: Name, block: Block) extends Statement
   case class Return() extends Statement
   case class Lambda() extends Statement
   case class ModelDef() extends Statement
