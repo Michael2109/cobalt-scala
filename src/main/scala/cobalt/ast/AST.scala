@@ -52,7 +52,7 @@ object AST {
 
   trait Block
   case class Inline(expression: Expression) extends Block
-  case class DoBlock(expression: Statement) extends Block
+  case class DoBlock(statement: Statement) extends Block
 
   // TODO Update args
   trait Expression

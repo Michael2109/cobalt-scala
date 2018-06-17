@@ -14,7 +14,7 @@ class ReassignParserTest extends FunSpec with Matchers
 {
   describe("Reassign parser")
   {
-    it("Should parse reassignment an inline expression")
+    it("Should parse reassignment an inline statement")
     {
       TestUtil.parse("x <- 2", StatementParser.statement) shouldBe Reassign(Name("x"),Inline(IntConst(2)))
     }

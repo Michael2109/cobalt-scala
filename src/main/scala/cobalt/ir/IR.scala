@@ -47,7 +47,7 @@ object IR {
 
   trait BlockIR
   case class InlineIR(expression: ExpressionIR) extends BlockIR
-  case class DoBlockIR(expression: StatementIR) extends BlockIR
+  case class DoBlockIR(statement: StatementIR) extends BlockIR
 
   // TODO Update args
   trait ExpressionIR
@@ -63,11 +63,11 @@ object IR {
   case class ABinaryIR(op: ABinOpIR, expression1: ExpressionIR, expression2: ExpressionIR) extends ExpressionIR
   case class BBinaryIR(op: BBinOpIR, expression1: ExpressionIR, expression2: ExpressionIR) extends ExpressionIR
   case class RBinaryIR(op: RBinOpIR, expression1: ExpressionIR, expression2: ExpressionIR) extends ExpressionIR
-  case class IntConst(value: Int) extends ExpressionIR
-  case class DoubleConst(value: Double) extends ExpressionIR
-  case class FloatConst(value: Float) extends ExpressionIR
-  case class LongConst(value: Long) extends ExpressionIR
-  case class Neg(expression: ExpressionIR) extends ExpressionIR
+  case class IntConstIR(value: Int) extends ExpressionIR
+  case class DoubleConstIR(value: Double) extends ExpressionIR
+  case class FloatConstIR(value: Float) extends ExpressionIR
+  case class LongConstIR(value: Long) extends ExpressionIR
+  case class NegIR(expression: ExpressionIR) extends ExpressionIR
 
   case class ArrayIR() extends ExpressionIR
   case class SpecialRefAsExprIR() extends ExpressionIR

@@ -1,7 +1,6 @@
 package cobalt.code_gen
 
-import cobalt.ast.AST.{ClassModel, Module, Statement}
-import cobalt.ir.IR.{ClassModelIR, ModuleIR, StatementIR}
+import cobalt.ast.AST.{Block, BlockExpr, BlockStmt, ClassModel, DoBlock, Expression, Inline, IntConst, Method, Module, Statement}
 
 import scala.tools.asm._
 import scala.tools.asm.Opcodes;
@@ -13,28 +12,68 @@ object CodeGen
 
   def genCode(module: Module): Array[Byte] =
   {
-    val classWriter = new ClassWriter(0)
+    val cw = new ClassWriter(0)
 
-    module.models.foreach(x => genCode(classWriter, x))
-    classWriter.visitEnd()
-    classWriter.toByteArray
+    module.models.foreach(x => genCode(cw, x))
+    cw.visitEnd()
+    cw.toByteArray
   }
 
-  def genCode(classWriter: ClassWriter, statement: Statement): Unit =
+  def genCode(cw: ClassWriter, statement: Statement): Unit =
   {
     statement match
     {
-      case classB: ClassModel => {
-        classWriter.visit(version, Opcodes.ACC_PUBLIC + Opcodes.ACC_SUPER, classB.name.value, null, "java/lang/Object", null)
-        val mv = classWriter.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null, null)
+      case classModel: ClassModel =>
+      {
+        cw.visit(version, Opcodes.ACC_PUBLIC + Opcodes.ACC_SUPER, classModel.name.value, null, "java/lang/Object", null)
+        val mv = cw.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null, null)
         mv.visitVarInsn(Opcodes.ALOAD, 0)
         mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/Object", "<init>", "()V")
         mv.visitInsn(Opcodes.RETURN)
         mv.visitMaxs(1, 1)
         mv.visitEnd()
+        genCode(cw, classModel.body)
+      }
+      case method: Method =>
+      {
+        val mv = cw.visitMethod(Opcodes.ACC_PUBLIC, method.name.value, "()V", null, null)
+        genCode(mv, method.body)
+        mv.visitInsn(Opcodes.RETURN)
+        mv.visitEnd()
       }
 
     }
+  }
+
+  def genCode(mv: MethodVisitor, expression: Expression): Unit =
+  {
+    expression match
+    {
+      case blockStmt: BlockExpr => blockStmt.expressions.foreach(x => genCode(mv, x))
+      case intConst: IntConst => intConstCodeGen(mv, intConst)
+    }
+  }
+
+  def genCode(mv: MethodVisitor, statement: Statement): Unit =
+  {
+    statement match
+    {
+      case blockStmt: BlockStmt => blockStmt.statements.foreach(x => genCode(mv, x))
+    }
+  }
+
+  def genCode(mv: MethodVisitor, block: Block): Unit =
+  {
+    block match
+    {
+      case inline: Inline => genCode(mv, inline.expression)
+      case doBlock: DoBlock => genCode(mv, doBlock.statement)
+    }
+  }
+
+  def intConstCodeGen(mv: MethodVisitor, intConst: IntConst): Unit =
+  {
+    mv.visitIntInsn(Opcodes.BIPUSH, intConst.value)
   }
 
   @throws[Exception]
