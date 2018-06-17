@@ -32,7 +32,7 @@ object AST {
 
   case class NameSpace(nameSpace: Seq[Name])
 
-  case class Name(name: String)
+  case class Name(value: String)
   case class QualName(nameSpace: NameSpace, name: Name)
 
   case class Annotation(name: Name)
