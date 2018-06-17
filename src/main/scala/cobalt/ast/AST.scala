@@ -6,7 +6,7 @@ object AST {
 
   case class ModuleHeader(nameSpace: NameSpace, imports: Seq[Import])
 
-  case class Import(loc: Seq[String])
+  case class Import(loc: Seq[Name])
 
   case class Field(name: Name, `type`: Type, init: Option[Type])
 
@@ -30,7 +30,7 @@ object AST {
   case class Extends() extends TypeRel
   case class Equals() extends TypeRel
 
-  case class NameSpace(nameSpace: Seq[String])
+  case class NameSpace(nameSpace: Seq[Name])
 
   case class Name(name: String)
   case class QualName(nameSpace: NameSpace, name: Name)

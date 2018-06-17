@@ -25,14 +25,21 @@ class Statements(indent: Int) {
 
   val ifStatementParser: P[Statement] = P(LexicalParser.kw("if") ~ "(" ~ ExpressionParser.expressionParser ~ ")" ~~ indentedBlock).map(x => If(x._1, x._2, null))
 
+  val importParser: P[Import] = P(LexicalParser.kw("import") ~ ExpressionParser.nameParser.rep(sep=".")).map(Import)
+
   val fieldParser: P[Field] = P(ExpressionParser.nameParser ~ ":" ~ ExpressionParser.typeRefParser).map(x => Field(x._1, x._2, None))
 
   val methodParser: P[Statement] = P(LexicalParser.kw("let") ~ ExpressionParser.nameParser ~ "(" ~ fieldParser.rep(sep = ",") ~ ")" ~ (":" ~ ExpressionParser.typeRefParser).? ~ "=" ~ blockParser).map(x => Method(x._1, Seq(), x._2, Seq(), x._3, x._4))
 
+  val modelParser: P[Statement] = P(LexicalParser.kw("class") ~ ExpressionParser.nameParser ~ indentedBlock).map(x => ClassModel(x._1, Seq(), Seq(), None, Seq(), Seq(), x._2))
+
+  val moduleParser: P[Module] = P(nameSpaceParser ~ importParser.rep ~ modelParser.rep).map(x => Module(ModuleHeader(x._1, x._2), x._3))
+
+  val nameSpaceParser: P[NameSpace] = P(LexicalParser.kw("package") ~ ExpressionParser.nameParser.rep(sep=".")).map(NameSpace)
+
   val reassignParser: P[Reassign] = P(ExpressionParser.nameParser ~ "<-" ~ blockParser).map(x => Reassign(x._1, x._2))
 
   val statement: P[Statement] = P(methodParser | assignParser | reassignParser | ifStatementParser | exprAsStmt)
-
 
   val indentedBlock: P[Statement] = {
     val deeper: P[Int] = {
