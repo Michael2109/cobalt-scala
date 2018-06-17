@@ -1,6 +1,6 @@
 package cobalt.parser.statement
 
-import cobalt.ast.ASTNew.{Assign, Identifier, IntConst, Name}
+import cobalt.ast.ASTNew._
 import cobalt.parser.StatementParserNew
 import cobalt.utils.TestUtil
 import org.junit.runner.RunWith
@@ -12,29 +12,32 @@ import scala.collection.mutable.ArrayBuffer
 @RunWith(classOf[JUnitRunner])
 class AssignParserTest extends FunSpec with Matchers
 {
-
-  // TODO Assign parser single
-
   describe("Assignment parser")
   {
     it("Should parse assignment")
     {
-      TestUtil.parse("let x = 10", StatementParserNew.statement) shouldBe IntConst(1)
+      TestUtil.parse("let x = 10", StatementParserNew.statement) shouldBe Assign(Name("x"),None,true,Inline(IntConst(10)))
     }
 
     it("Should parse mutable assignment")
     {
-      TestUtil.parse("let mutable x = 10", StatementParserNew.statement) shouldBe IntConst(1)
+      TestUtil.parse("let mutable x = 10", StatementParserNew.statement) shouldBe Assign(Name("x"),None,false,Inline(IntConst(10)))
     }
 
     it("Should parse with type defined")
     {
-      TestUtil.parse("let x: Int = 10", StatementParserNew.statement) shouldBe IntConst(1)
+      TestUtil.parse("let x: Int = 10", StatementParserNew.statement) shouldBe Assign(Name("x"),Some(TypeRef(RefLocal(Name("Int")))),true,Inline(IntConst(10)))
     }
 
-    // TODO "let x: Int = do"
-    //      "  x"
-    //      "  y"
+    it("Should parse with a do block")
+    {
+      val code =
+        """let x = do
+          |  x
+          |  y
+        """.stripMargin.replace("\r", "")
+      TestUtil.parse(code, StatementParserNew.statement) shouldBe Assign(Name("x"),None,true,DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x"))), ExprAsStmt(Identifier(Name("y")))))))
+    }
   }
 
   describe("Multiple assignment parser") {

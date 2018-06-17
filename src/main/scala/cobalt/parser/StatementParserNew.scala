@@ -15,15 +15,17 @@ class Statements(indent: Int) {
   val indents = P("\n" ~~ " ".repX(indent))
   val spaces = P((LexicalParser.nonewlinewscomment.? ~~ "\n").repX(1))
 
-  val assignmentParser: P[Assign] = P(LexicalParser.kw("let") ~ ("mutable").!.? ~ ExpressionParserNew.nameParser ~ (":" ~ ExpressionParserNew.typeRefParser).? ~ "=" ~ blockParser).map(x => Assign(x._2, x._3, x._1.isEmpty, x._4))
+  val assignParser: P[Assign] = P(LexicalParser.kw("let") ~ ("mutable").!.? ~ ExpressionParserNew.nameParser ~ (":" ~ ExpressionParserNew.typeRefParser).? ~ "=" ~ blockParser).map(x => Assign(x._2, x._3, x._1.isEmpty, x._4))
 
-  val blockParser: P[Block] = ExpressionParserNew.expressionParser.map(Inline) | doBlock
+  val blockParser: P[Block] = P(doBlock | ExpressionParserNew.expressionParser.map(Inline))
 
-  val doBlock: P[Block] = P(LexicalParser.kw("do")) ~~ indentedBlock.map(DoBlock)
+  val doBlock: P[Block] = P(LexicalParser.kw("do") ~~ indentedBlock).map(DoBlock)
 
   val ifStatementParser: P[Statement] = P(LexicalParser.kw("if") ~ "(" ~ ExpressionParserNew.expressionParser ~ ")" ~~ indentedBlock).map(x => If(x._1, x._2, null))
 
-  val statement: P[Statement] = P(assignmentParser | ifStatementParser | exprAsStmt)
+  // val reassignParser: P[Reassign] = P
+
+  val statement: P[Statement] = P(assignParser | ifStatementParser | exprAsStmt)
 
   val exprAsStmt: P[Statement] = ExpressionParserNew.expressionParser.map(ExprAsStmt)
 
