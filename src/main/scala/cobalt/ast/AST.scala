@@ -1,183 +1,117 @@
-/*
 package cobalt.ast
 
-/**
-  * A python abstract syntax tree
-  *
-  * Basically transcribed from https://docs.python.org/2/library/ast.html
-  */
-object Ast{
-  case class identifier(name: String)
-  type bool = Boolean
-  type int = Int
-  type `object` = Double
-  type string = String
+object AST {
 
-  sealed trait mod
-  object mod{
-    case class Module(body: Seq[stmt]) extends mod
-    case class Interactive(body: Seq[stmt]) extends mod
-    case class Expression(body: Seq[stmt]) extends mod
-  }
+  case class Module(header: ModuleHeader, models: Seq[Statement])
 
-  sealed trait stmt
-  object stmt{
-    case class MethodDef(name: identifier, fields: Fields, returnType: Option[Ast.identifier], body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
-    case class ClassDef(name: identifier, bases: Seq[expr], body: Seq[stmt], decorator_list: Seq[expr]) extends stmt
-    case class Return(value: Option[expr]) extends stmt
+  case class ModuleHeader(nameSpace: NameSpace, imports: Seq[Import])
 
-    case class Delete(targets: Seq[expr]) extends stmt
-    case class Assign(id: identifier, `type`: Option[identifier], immutable: Boolean, e: expr) extends stmt
-    case class AugAssign(target: expr, op: operator, value: expr) extends stmt
+  case class Import(loc: Seq[String])
 
-    // not sure if bool allowed: is, can always use int
-    case class Print(dest: Option[expr], values: Seq[expr], nl: bool) extends stmt
-    case class Println(dest: Option[expr], values: Seq[expr], nl: bool) extends stmt
+  case class Field(name: Name, `type`: Type, init: Option[Type])
 
-    // use 'orelse' because else is a keyword in target languages
-    case class For(target: expr, iter: expr, body: Seq[stmt], orelse: Seq[stmt]) extends stmt
-    case class While(test: expr, body: Seq[stmt], orelse: Seq[stmt]) extends stmt
-    case class If(test: expr, body: Seq[stmt], orelse: Seq[stmt]) extends stmt
-    case class With(context_expr: expr, optional_vars: Option[expr], body: Seq[stmt]) extends stmt
+  trait Type
+  case class Init() extends Type
+  case class TypeRef(ref: Ref) extends Type
+  case class TypeApp(ref: Ref, types: Seq[Type]) extends Type // Type application, aka Map<A,B> -> `TyApp (RefLocal "Map") [TyRef (RefLocal "A"), TyRef (RefLocal "B")]`
+  //case class TypeRel(typeRel: TypeRel, `type1`: Type, `type2`: Type) extends Type // This allows things like <T extends Something> which would be `TyRel Extends (TyRef (RefLocal "T")) (TyRef (RefLocal "Something"))`
 
-    // 'type' is a bad name
-    case class Raise(`type`: Option[expr], inst: Option[expr], tback: Option[expr]) extends stmt
-    case class TryExcept(body: Seq[stmt], handlers: Seq[excepthandler], orelse: Seq[stmt]) extends stmt
-    case class TryFinally(body: Seq[stmt], finalbody: Seq[stmt]) extends stmt
-    case class Assert(test: expr, msg: Option[expr]) extends stmt
+  trait Ref
+  case class RefSpecial(specialRef: SpecialRef) extends Ref
+  case class RefLocal(name: Name) extends Ref
+  case class RefQual(qualName: QualName) extends Ref
 
-    case class Import(names: Seq[alias]) extends stmt
-    case class ImportFrom(module: Option[identifier], names: Seq[alias], level: Option[int]) extends stmt
+  trait SpecialRef
+  case class Super() extends SpecialRef
+  case class This() extends SpecialRef
 
-    // Doesn't capture requirement that locals must be
-    // defined if globals is
-    // still supports use as a function!
-    case class Exec(body: expr, globals: Option[expr], locals: Option[expr]) extends stmt
+  trait TypeRel
+  case class Inherits() extends TypeRel
+  case class Extends() extends TypeRel
+  case class Equals() extends TypeRel
 
-    case class Global(names: Seq[identifier]) extends stmt
-    case class Expr(value: expr) extends stmt
-    case object Pass extends stmt
-    case object Break extends stmt
-    case object Continue extends stmt
+  case class NameSpace(nameSpace: Seq[String])
 
-    // XXX Jython will be different
-    // col_offset is the byte offset in the utf8 string the parser uses
-    case class attributes(lineno: Int, col_offset: Int)
-  }
+  case class Name(name: String)
+  case class QualName(nameSpace: NameSpace, name: Name)
 
-  // BoolOp() can use left & right?
-  sealed trait expr
-  object expr{
-    case class BoolOp(op: boolop, values: Seq[expr]) extends expr
-    case class BinOp(left: expr, op: operator, right: expr) extends expr
-    case class UnaryOp(op: unaryop, operand: expr) extends expr
-    case class Lambda(fields: Fields, body: expr) extends expr
-    case class IfExp(test: expr, body: expr, orelse: expr) extends expr
-    case class Dict(keys: Seq[expr], values: Seq[expr]) extends expr
-    case class Set(elts: Seq[expr]) extends expr
-    case class ListComp(elt: expr, generators: Seq[comprehension]) extends expr
-    case class SetComp(elt: expr, generators: Seq[comprehension]) extends expr
-    case class DictComp(key: expr, value: expr, generators: Seq[comprehension]) extends expr
-    case class GeneratorExp(elt: expr, generators: Seq[comprehension]) extends expr
-    // the grammar constrains where yield expressions can occur
-    case class Yield(value: Option[expr]) extends expr
-    // need sequences for compare to distinguish between
-    // x < 4 < 3 and (x < 4) < 3
-    case class Compare(left: expr, ops: Seq[operator], comparators: Seq[expr]) extends expr
-    case class Call(func: expr, args: Seq[expr], keywords: Seq[keyword], starargs: Option[expr], kwargs: Option[expr]) extends expr
-    case class Repr(value: expr) extends expr
-    case class Num(n: Any) extends expr // a number as a PyObject.
-    case class Str(s: string) extends expr // need to raw: specify, unicode, etc?
-    // other bools: Option[literals]?
+  case class Annotation(name: Name)
 
-    // the following expression can appear in assignment context
-    case class Attribute(value: expr, attr: identifier, ctx: expr_context) extends expr
-    case class Subscript(value: expr, slice: slice, ctx: expr_context) extends expr
-    case class Name(id: identifier, ctx: expr_context) extends expr
-    case class List(elts: Seq[expr], ctx: expr_context) extends expr
-    case class Tuple(elts: Seq[expr], ctx: expr_context) extends expr
-  }
-  // col_offset is the byte offset in the utf8 string the parser uses
-  case class attributes(lineno: Int, col_offset: Int)
+  trait Modifier
+  case object Public extends Modifier
+  case object Protected extends Modifier
+  case object Private extends Modifier
+  case object PackageLocal extends Modifier
+  case object Abstract extends Modifier
+  case object Final extends Modifier
+  case object Pure extends Modifier
 
-  sealed trait expr_context
-  object expr_context{
+  trait Block
+  case class Inline(expression: Expression) extends Block
+  case class DoBlock(expression: Statement) extends Block
 
-    case object Load extends expr_context
-    case object Store extends expr_context
-    case object Del extends expr_context
-    case object AugLoad extends expr_context
-    case object AugStore extends expr_context
-    case object Param extends expr_context
-  }
-  sealed trait slice
-  object slice{
+  // TODO Update args
+  trait Expression
+  case class BlockExpr(expressions: Seq[Expression]) extends Expression
+  case class Identifier(name: Name) extends Expression
+  case class MethodCall(name: Name, expression: Expression) extends Expression
+  case class NewClassInstance(`type`: Type, expression: Expression, anonymousClass: Option[Statement]) extends Expression
+  case class StringLiteral(value: String) extends Expression
+  case class Ternary() extends Expression
+  case class Tuple() extends Expression
+  case class BoolConst() extends Expression
+  case class Not() extends Expression
+  case class ABinary(op: ABinOp, expression1: Expression, expression2: Expression) extends Expression
+  case class BBinary(op: BBinOp, expression1: Expression, expression2: Expression) extends Expression
+  case class RBinary(op: RBinOp, expression1: Expression, expression2: Expression) extends Expression
+  case class IntConst(value: Int) extends Expression
+  case class DoubleConst(value: Double) extends Expression
+  case class FloatConst(value: Float) extends Expression
+  case class LongConst(value: Long) extends Expression
+  case class Neg(expression: Expression) extends Expression
 
-    case object Ellipsis extends slice
-    case class Slice(lower: Option[expr], upper: Option[expr], step: Option[expr]) extends slice
-    case class ExtSlice(dims: Seq[slice]) extends slice
-    case class Index(value: expr) extends slice
-  }
+  case class Array() extends Expression
+  case class SpecialRefAsExpr() extends Expression
 
-  sealed trait boolop
-  object boolop{
-    case object And extends boolop
-    case object Or extends boolop
-  }
+  trait Statement
+  case class ClassModel(name: Name, modifiers: Seq[Modifier], fields: Seq[Field], parent: Option[Type], parentArguments: Seq[Expression], interfaces: Seq[Type], body: Statement) extends Statement
+  case class ObjectModel(name: Name, modifiers: Seq[Modifier], fields: Seq[Field], parent: Option[Type], parentArguments: Seq[Expression], interfaces: Seq[Type], body: Statement) extends Statement
+  case class TraitModel(name: Name, modifiers: Seq[Modifier], fields: Seq[Field], parent: Option[Type], parentArguments: Seq[Expression], interfaces: Seq[Type], body: Statement) extends Statement
+  case class Method(name: Name, annotations: Seq[Annotation], fields: Seq[Field], modifiers: Seq[Modifier], returnType: Option[Type], body: Block) extends Statement
+  case class For() extends Statement
+  case class While() extends Statement
+  case class If(condition: Expression, ifBlock: Statement, elseBlock: Statement) extends Statement
+  case class Assign(name: Name, `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
+  case class AssignMultiple(name: Seq[Name], `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
+  case class Reassign(name: Name, block: Block) extends Statement
+  case class Return() extends Statement
+  case class Lambda() extends Statement
+  case class ModelDef() extends Statement
+  case class ExprAsStmt(expression: Expression) extends Statement
+  case class BlockStmt(statements: Seq[Statement]) extends Statement
+  case class Match() extends Statement
+  case class Print() extends Statement
+  case class Println() extends Statement
 
-  sealed trait operator
-  case object operator{
-    case object Add extends operator
-    case object Sub  extends operator
-    case object Mult  extends operator
-    case object Div  extends operator
-    case object Mod  extends operator
-    case object Pow  extends operator
-    case object LShift  extends operator
-    case object RShift  extends operator
-    case object BitOr  extends operator
-    case object BitXor  extends operator
-    case object BitAnd  extends operator
-    case object FloorDiv extends operator
+  case class Case(expression: Expression, block: Block)
 
-    case object Eq extends operator
-    case object NotEq extends operator
-    case object Lt extends operator
-    case object LtE extends operator
-    case object Gt extends operator
-    case object GtE extends operator
-    case object Is extends operator
-    case object IsNot extends operator
-    case object In extends operator
-    case object NotIn extends operator
-  }
+  trait Operator
 
-  sealed trait unaryop
-  object unaryop{
+  trait ABinOp extends Operator
+  case object Add extends ABinOp
+  case object Subtract extends ABinOp
+  case object Multiply extends ABinOp
+  case object Divide extends ABinOp
 
-    case object Invert extends unaryop
-    case object Not extends unaryop
-    case object UAdd extends unaryop
-    case object USub extends unaryop
-  }
+  trait BBinOp extends Operator
+  case object And extends BBinOp
+  case object Or extends BBinOp
 
-  case class comprehension(target: expr, iter: expr, ifs: Seq[expr])
+  trait RBinOp extends Operator
+  case object GreaterEqual extends RBinOp
+  case object Greater extends RBinOp
+  case object LessEqual extends RBinOp
+  case object Less extends RBinOp
+  case object Equal extends RBinOp
 
-  // not sure what to call the first argument for raise and except
-  sealed trait excepthandler
-  object excepthandler{
-    case class ExceptHandler(`type`: Option[expr], name: Option[expr], body: Seq[stmt]) extends excepthandler
-  }
-
-  case class Field(name: identifier, `type`: identifier)
-  case class Fields(fields: Seq[Field])
-
-  //case class arguments(args: Seq[expr], vararg: Option[identifier], kwarg: Option[identifier], defaults: Seq[expr])
-
-  // keyword arguments supplied to call
-  case class keyword(arg: identifier, value: expr)
-
-  // import name with optional 'as' alias.
-  case class alias(name: identifier, asname: Option[identifier])
 }
-*/

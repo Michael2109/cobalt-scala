@@ -1,6 +1,6 @@
 package cobalt.parser
 
-import cobalt.ast.ASTNew
+import cobalt.ast.AST
 
 object WsApi extends fastparse.WhitespaceApi.Wrapper(LexicalParser.wscomment)
 
@@ -28,7 +28,8 @@ object LexicalParser {
     "break", "except", "import", "print", "println",
     "class", "exec", "in", "raise",
     "continue", "finally", "is", "return",
-    "for", "lambda", "try", "mutable"
+    "for", "lambda", "try", "mutable",
+    "let"
   )
 
   val stringliteral: P[String] = P(stringprefix.? ~ (longstring | shortstring))

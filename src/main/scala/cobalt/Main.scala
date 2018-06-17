@@ -1,12 +1,12 @@
 package cobalt
 
-import cobalt.parser.{ExpressionParserNew, StatementParserNew, WsApi}
+import cobalt.parser.{ExpressionParser, StatementParser, WsApi}
 import fastparse.core.Parsed
 import fastparse.noApi._
-import cobalt.ast.ASTNew
+import cobalt.ast.AST
 import fastparse.noApi._
 import WsApi._
-import cobalt.ast.ASTNew.Name
+import cobalt.ast.AST.Name
 
 object Main
 {
@@ -14,7 +14,7 @@ object Main
   import sext._
 
   def parse(str: String) = {
-    StatementParserNew.statement.parse(str) match {
+    StatementParser.statement.parse(str) match {
       case Parsed.Success(a, b) => println(a + " : " + b)
       case Parsed.Failure(a, b, c)  => println(a + " : " + b + " : " + c)
     }
@@ -35,7 +35,7 @@ object Main
     parse(code)
     println()*/
 
-    def ripplingNipsParser: P[Seq[Name]] = P(ExpressionParserNew.nameParser.rep()).map(x => x)
+    def ripplingNipsParser: P[Seq[Name]] = P(ExpressionParser.nameParser.rep()).map(x => x)
 
     ripplingNipsParser.parse("rippling nips test some other text") match {
       case Parsed.Success(a, b) => println(a + " : " + b)

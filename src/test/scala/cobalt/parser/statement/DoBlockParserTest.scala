@@ -1,7 +1,7 @@
 package cobalt.parser.statement
 
-import cobalt.ast.ASTNew._
-import cobalt.parser.StatementParserNew
+import cobalt.ast.AST._
+import cobalt.parser.StatementParser
 import cobalt.utils.TestUtil
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
@@ -22,7 +22,7 @@ class DoBlockParserTest extends FunSpec with Matchers
           |  y
           |  z
         """.stripMargin.replace("\r", "")
-      TestUtil.parse(code, StatementParserNew.doBlock) shouldBe DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x"))), ExprAsStmt(Identifier(Name("y"))), ExprAsStmt(Identifier(Name("z"))))))
+      TestUtil.parse(code, StatementParser.doBlock) shouldBe DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x"))), ExprAsStmt(Identifier(Name("y"))), ExprAsStmt(Identifier(Name("z"))))))
     }
   }
 }

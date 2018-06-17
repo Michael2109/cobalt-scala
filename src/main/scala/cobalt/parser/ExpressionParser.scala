@@ -1,203 +1,58 @@
-/*
 package cobalt.parser
 
 import fastparse.noApi._
 import WsApi._
-import cobalt.ast.Ast
+import cobalt.ast.AST._
+import cobalt.ast.{AST}
 
-object ExpressionParser
-{
+object ExpressionParser {
 
-  def tuplize(xs: Seq[Ast.expr]) = xs match{
-    case Seq(x) => x
-    case xs => Ast.expr.Tuple(xs, Ast.expr_context.Load)
-  }
+  val annotationParser: P[Annotation] = nameParser.map(Annotation)
 
-  val name: P[Ast.identifier] = LexicalParser.identifier
-  val number: P[Ast.expr.Num] = P( LexicalParser.floatnumber | LexicalParser.longinteger | LexicalParser.integer | LexicalParser.imagnumber ).map(Ast.expr.Num)
-  val string: P[Ast.string] = LexicalParser.stringliteral
+  val identifierParser: P[AST.Identifier] = LexicalParser.identifier.map(x => Identifier(Name(x)))
+  val nameParser: P[Name] = LexicalParser.identifier.map(x => Name(x))
+  val numberParser: P[IntConst] = P( LexicalParser.floatnumber | LexicalParser.longinteger | LexicalParser.integer | LexicalParser.imagnumber ).map(x => IntConst(x.toInt))
+  val stringLiteral: P[StringLiteral] = LexicalParser.stringliteral.map(x => StringLiteral(x))
 
-  val test: P[Ast.expr] = {
-    val ternary = P( or_test ~ (LexicalParser.kw("if") ~ or_test ~ LexicalParser.kw("else") ~ test).? ).map{
-      case (x, None) => x
-      case (x, Some((test, neg))) => Ast.expr.IfExp(test, x, neg)
-    }
-    P( ternary | lambdef )
-  }
-  val or_test = P( and_test.rep(1, LexicalParser.kw("or")) ).map{
-    case Seq(x) => x
-    case xs => Ast.expr.BoolOp(Ast.boolop.Or, xs)
-  }
-  val and_test = P( not_test.rep(1, LexicalParser.kw("and")) ).map{
-    case Seq(x) => x
-    case xs => Ast.expr.BoolOp(Ast.boolop.And, xs)
-  }
-  val not_test: P[Ast.expr] = P( ("not" ~ not_test).map(Ast.expr.UnaryOp(Ast.unaryop.Not, _)) | comparison )
-  val comparison: P[Ast.expr] = P( expr ~ (comp_op ~ expr).rep ).map{
-    case (lhs, Nil) => lhs
+  val expressionParser: P[Expression] = P(Chain(rExprParser, and | or))
+  private val rExprParser: P[Expression] = P(Chain(arith_exprParser, LtE | Lt | GtE | Gt))
+  private val arith_exprParser: P[Expression] = P(Chain(termParser, add | subtract))
+  private val termParser: P[Expression] = P(Chain(allExpressionsParser, multiply | divide ))
+  private val parensParser: P[Expression] = P( "(" ~ (expressionParser) ~ ")" )
+
+  private val allExpressionsParser = numberParser | identifierParser | stringLiteral | parensParser
+
+  def finalModifierParser: P[AST.Final.type] = P("final").map(x => Final)
+
+  def methodCallParser: P[MethodCall] = (nameParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => MethodCall(x._1, BlockExpr(x._2)))
+
+  def newClassInstanceParser: P[NewClassInstance] = ("new" ~ typeRefParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => NewClassInstance(x._1, BlockExpr(x._2), None))
+
+  def typeRefParser: P[Type] = nameParser.map(x => TypeRef(RefLocal(x)))
+
+  private def Chain(p: P[Expression], op: P[AST.Operator]) = P(p ~ (op ~ p).rep).map {
     case (lhs, chunks) =>
-      val (ops, vals) = chunks.unzip
-      Ast.expr.Compare(lhs, ops, vals)
+      chunks.foldLeft(lhs) { case (lhs, (operator, rhs)) =>
+        operator match {
+          case op: ABinOp => new ABinary(op, lhs, rhs)
+          case op: BBinOp => new BBinary(op, lhs, rhs)
+          case op: RBinOp => new RBinary(op, lhs, rhs)
+        }
+
+      }
   }
 
-  // Common operators, mapped from their
-  // strings to their type-safe representations
   def op[T](s: P0, rhs: T) = s.!.map(_ => rhs)
-  val LShift = op("<<", Ast.operator.LShift)
-  val RShift = op(">>", Ast.operator.RShift)
-  val Lt = op("<", Ast.operator.Lt)
-  val Gt = op(">", Ast.operator.Gt)
-  val Eq = op("==", Ast.operator.Eq)
-  val GtE = op(">=", Ast.operator.GtE)
-  val LtE = op("<=", Ast.operator.LtE)
-  val NotEq = op("<>" | "!=", Ast.operator.NotEq)
-  val In = op("in", Ast.operator.In)
-  val NotIn = op("not" ~ "in", Ast.operator.NotIn)
-  val Is = op("is", Ast.operator.Is)
-  val IsNot = op("is" ~ "not", Ast.operator.IsNot)
-  val comp_op = P( LtE|GtE|Eq|Gt|Lt|NotEq|In|NotIn|IsNot|Is )
-  val Add = op("+", Ast.operator.Add)
-  val Sub = op("-", Ast.operator.Sub)
-  val Pow = op("**", Ast.operator.Pow)
-  val Mult= op("*", Ast.operator.Mult)
-  val Div = op("/", Ast.operator.Div)
-  val Mod = op("%", Ast.operator.Mod)
-  val FloorDiv = op("//", Ast.operator.FloorDiv)
-  val BitOr = op("|", Ast.operator.BitOr)
-  val BitAnd = op("&", Ast.operator.BitAnd)
-  val BitXor = op("^", Ast.operator.BitXor)
-  val UAdd = op("+", Ast.unaryop.UAdd)
-  val USub = op("-", Ast.unaryop.USub)
-  val Invert = op("~", Ast.unaryop.Invert)
-  val unary_op = P ( UAdd | USub | Invert )
-
-
-  def Unary(p: P[Ast.expr]) =
-    (unary_op ~ p).map{ case (op, operand) => Ast.expr.UnaryOp(op, operand) }
-
-  def Chain(p: P[Ast.expr], op: P[Ast.operator]) = P( p ~ (op ~ p).rep ).map{
-    case (lhs, chunks) =>
-      chunks.foldLeft(lhs){case (lhs, (op, rhs)) =>
-        Ast.expr.BinOp(lhs, op, rhs)
-      }
-  }
-  val expr: P[Ast.expr] = P( Chain(xor_expr, BitOr) )
-  val xor_expr: P[Ast.expr] = P( Chain(and_expr, BitXor) )
-  val and_expr: P[Ast.expr] = P( Chain(shift_expr, BitAnd) )
-  val shift_expr: P[Ast.expr] = P( Chain(arith_expr, LShift | RShift) )
-
-  val arith_expr: P[Ast.expr] = P( Chain(term, Add | Sub) )
-  val term: P[Ast.expr] = P( Chain(factor, Mult | Div | Mod | FloorDiv) )
-  // number appears here and below in `atom` to give it precedence.
-  // This ensures that "-2" will parse as `Num(-2)` rather than
-  // as `UnaryOp(USub, Num(2))`.
-  val factor: P[Ast.expr] = P( number | Unary(factor) | power )
-  val power: P[Ast.expr] = P( atom ~ trailer.rep ~ (Pow ~ factor).? ).map{
-    case (lhs, trailers, rhs) =>
-      val left = trailers.foldLeft(lhs)((l, t) => t(l))
-      rhs match{
-        case None => left
-        case Some((op, right)) => Ast.expr.BinOp(left, op, right)
-      }
-  }
-  val atom: P[Ast.expr] = {
-    val empty_tuple = ("(" ~ ")").map(_ => Ast.expr.Tuple(Nil, Ast.expr_context.Load))
-    val empty_list = ("[" ~ "]").map(_ => Ast.expr.List(Nil, Ast.expr_context.Load))
-    val empty_dict = ("{" ~ "}").map(_ => Ast.expr.Dict(Nil, Nil))
-    P(
-      empty_tuple  |
-        empty_list |
-        empty_dict |
-        "(" ~ (yield_expr | generator | tuple | test) ~ ")" |
-        "[" ~ (list_comp | list) ~ "]" |
-        "{" ~ dictorsetmaker ~ "}" |
-        "`" ~ testlist1.map(x => Ast.expr.Repr(Ast.expr.Tuple(x, Ast.expr_context.Load))) ~ "`" |
-        string.rep(1).map(_.mkString).map(Ast.expr.Str) |
-        name.map(Ast.expr.Name(_, Ast.expr_context.Load)) |
-        number
-    )
-  }
-  val list_contents = P( test.rep(1, ",") ~ ",".? )
-  val list = P( list_contents ).map(Ast.expr.List(_, Ast.expr_context.Load))
-  val tuple_contents = P( test ~ "," ~ list_contents.?).map { case (head, rest)  => head +: rest.getOrElse(Seq.empty) }
-  val tuple = P( tuple_contents).map(Ast.expr.Tuple(_, Ast.expr_context.Load))
-  val list_comp_contents = P( test ~ comp_for.rep(1) )
-  val list_comp = P( list_comp_contents ).map(Ast.expr.ListComp.tupled)
-  val generator = P( list_comp_contents ).map(Ast.expr.GeneratorExp.tupled)
-
-  val lambdef: P[Ast.expr.Lambda] = P( LexicalParser.kw("lambda") ~ fields ~ ":" ~ test ).map(Ast.expr.Lambda.tupled)
-  val trailer: P[Ast.expr => Ast.expr] = {
-    val call = P("(" ~ arglist ~ ")").map{ case (args, (keywords, starargs, kwargs)) => (lhs: Ast.expr) => Ast.expr.Call(lhs, args, keywords, starargs, kwargs)}
-    val slice = P("[" ~ subscriptlist ~ "]").map(args => (lhs: Ast.expr) => Ast.expr.Subscript(lhs, args, Ast.expr_context.Load))
-    val attr = P("." ~ name).map(id => (lhs: Ast.expr) => Ast.expr.Attribute(lhs, id, Ast.expr_context.Load))
-    P( call | slice | attr )
-  }
-  val subscriptlist = P( subscript.rep(1, ",") ~ ",".? ).map{
-    case Seq(x) => x
-    case xs => Ast.slice.ExtSlice(xs)
-  }
-  val subscript: P[Ast.slice] = {
-    val ellipses = P( ("." ~ "." ~ ".").map(_ => Ast.slice.Ellipsis) )
-    val single = P( test.map(Ast.slice.Index) )
-    val multi = P(test.? ~ ":" ~ test.? ~ sliceop.?).map { case (lower, upper, step) =>
-      Ast.slice.Slice(
-        lower,
-        upper,
-        step.map(_.getOrElse(Ast.expr.Name(Ast.identifier("None"), Ast.expr_context.Load)))
-      )
-    }
-    P( ellipses | multi | single )
-  }
-
-  val sliceop = P( ":" ~ test.? )
-  val exprlist: P[Seq[Ast.expr]] = P( expr.rep(1, sep = ",") ~ ",".? )
-  val testlist: P[Seq[Ast.expr]] = P( test.rep(1, sep = ",") ~ ",".? )
-  val dictorsetmaker: P[Ast.expr] = {
-    val dict_item = P( test ~ ":" ~ test )
-    val dict: P[Ast.expr.Dict] = P(
-      (dict_item.rep(1, ",") ~ ",".?).map{x =>
-        val (keys, values) = x.unzip
-        Ast.expr.Dict(keys, values)
-      }
-    )
-    val dict_comp = P(
-      (dict_item ~ comp_for.rep(1)).map(Ast.expr.DictComp.tupled)
-    )
-    val set: P[Ast.expr.Set] = P( test.rep(1, ",") ~ ",".? ).map(Ast.expr.Set)
-    val set_comp = P( test ~ comp_for.rep(1) ).map(Ast.expr.SetComp.tupled)
-    P( dict_comp | dict | set_comp | set)
-  }
-
-  val arglist = {
-    val inits = P( (plain_argument ~ !"=").rep(0, ",") )
-    val later = P( named_argument.rep(0, ",") ~ ",".? ~ ("*" ~ test).? ~ ",".? ~ ("**" ~ test).? )
-    P( inits ~ ",".? ~ later )
-  }
-
-  val plain_argument = P( test ~ comp_for.rep ).map{
-    case (x, Nil) => x
-    case (x, gens) => Ast.expr.GeneratorExp(x, gens)
-  }
-  val named_argument = P( name ~ "=" ~ test  ).map(Ast.keyword.tupled)
-
-  val comp_for: P[Ast.comprehension] = P( "for" ~ exprlist ~ "in" ~ or_test ~ comp_if.rep ).map{
-    case (targets, test, ifs) => Ast.comprehension(tuplize(targets), test, ifs)
-  }
-  val comp_if: P[Ast.expr] = P( "if" ~ test )
-
-  val testlist1: P[Seq[Ast.expr]] = P( test.rep(1, sep = ",") )
-
-  // not used in grammar, but may appear in "node" passed from Parser to Compiler
-  //  val encoding_decl: P0 = P( name )
-
-  val yield_expr: P[Ast.expr.Yield] = P( LexicalParser.kw("yield") ~ testlist.map(tuplize).? ).map(Ast.expr.Yield)
-
-  val fields: P[Ast.Fields] = {
-    val field = (name ~ ":" ~ name).map(x => new Ast.Field(x._1, x._2))
-    field.rep(sep = ",").map(x => new Ast.Fields(x))
-  }
-
-  val fpdef: P[Ast.expr] = P( name.map(Ast.expr.Name(_, Ast.expr_context.Param)) | "(" ~ fplist ~ ")" )
-  val fplist: P[Ast.expr] = P( fpdef.rep(sep = ",") ~ ",".? ).map(Ast.expr.Tuple(_, Ast.expr_context.Param))
+  val Lt = op("<", AST.Less)
+  val Gt = op(">", AST.Greater.asInstanceOf[Operator])
+  val Eq = op("==", AST.Equal.asInstanceOf[Operator])
+  val GtE = op(">=", AST.GreaterEqual.asInstanceOf[Operator])
+  val LtE = op("<=", AST.LessEqual.asInstanceOf[Operator])
+  val comp_op = P(LtE | GtE | Eq | Gt | Lt)
+  val add = op("+", AST.Add.asInstanceOf[Operator])
+  val subtract = op("-", AST.Subtract.asInstanceOf[Operator])
+  val multiply = op("*", AST.Multiply.asInstanceOf[Operator])
+  val divide = op("/", AST.Divide.asInstanceOf[Operator])
+  val and = op("&&", AST.And.asInstanceOf[Operator])
+  val or = op("||", AST.Or.asInstanceOf[Operator])
 }
-*/
