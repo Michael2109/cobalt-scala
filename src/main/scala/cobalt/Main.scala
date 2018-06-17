@@ -10,7 +10,7 @@ import cobalt.ast.AST.Name
 
 object Main
 {
-/*
+
   import sext._
 
   def parse(str: String) = {
@@ -19,10 +19,10 @@ object Main
       case Parsed.Failure(a, b, c)  => println(a + " : " + b + " : " + c)
     }
   }
-*/
+
 
   def main(args: Array[String]): Unit =
-  {/*
+  {
     def code =
       """let x = 10
       """.stripMargin.trim.replace("\r", "")
@@ -33,14 +33,6 @@ object Main
 
     println("Tree:")
     parse(code)
-    println()*/
-
-    def ripplingNipsParser: P[Seq[Name]] = P(ExpressionParser.nameParser.rep()).map(x => x)
-
-    ripplingNipsParser.parse("rippling nips test some other text") match {
-      case Parsed.Success(a, b) => println(a + " : " + b)
-    }
-
     println()
 
   }
