@@ -33,7 +33,7 @@ object Main
     {
       case Parsed.Success(a, b) => {
         bos.write(CodeGen.genCode(AST.moduleToModuleIR(a)))
-        println(a.treeString + " : " + b)
+        println(AST.moduleToModuleIR(a).treeString + " : " + b)
       }
       case Parsed.Failure(a, b, c)  => println(a + " : " + b + " : " + c)
     }
