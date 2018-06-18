@@ -51,6 +51,10 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.github.nikita-volkov/sext
     compile group: 'com.github.nikita-volkov', name: 'sext', version: '0.2.2'
+
+    // scopt - Command line argument parsing
+    compile group: 'com.github.scopt', name: 'scopt_2.11', version: '3.3.0'
+
 }
 
 allprojects {
