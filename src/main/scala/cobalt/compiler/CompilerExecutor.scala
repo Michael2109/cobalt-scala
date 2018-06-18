@@ -7,8 +7,11 @@ object CompilerExecutor {
   val usage = "Usage: -cp <class_path> -d <destination_dir>"
 
   def main(args: Array[String]): Unit = {
-    if (args.length == 0) println(usage)
-    val arglist = args.toList
+
+    val arguments = "-cp src/test/resources/cobalt/ -d cobalt_generated/ test/Test.cobalt".split("\\s")
+
+    if (arguments.length == 0) println(usage)
+    val arglist = arguments.toList
     type OptionMap = Map[CommandLineOption, String]
 
     def nextOption(commandLineOptions: OptionMap, list: List[String]): OptionMap = {
