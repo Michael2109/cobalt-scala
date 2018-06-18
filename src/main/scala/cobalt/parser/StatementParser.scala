@@ -1,6 +1,5 @@
 package cobalt.parser
 
-
 import fastparse.noApi._
 import WsApi._
 import cobalt.ast.AST._

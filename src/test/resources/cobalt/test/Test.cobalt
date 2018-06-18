@@ -1,0 +1,3 @@
+package x.y.z
+class ClassName
+  let x(): Int = 1
