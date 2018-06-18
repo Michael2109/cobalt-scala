@@ -146,7 +146,22 @@ object AST {
   def expressionToExpressionIR(expression: Expression): ExpressionIR = expression match
   {
     case blockExpr: BlockExpr => BlockExprIR(blockExpr.expressions.map(expressionToExpressionIR))
+    case identifier: Identifier => IdentifierIR(nameToNameIR(identifier.name))
+    case methodCall: MethodCall => MethodCallIR(nameToNameIR(methodCall.name), expressionToExpressionIR(methodCall.expression))
+    case newClassInstance: NewClassInstance => NewClassInstanceIR(typeToTypeIR(newClassInstance.`type`), expressionToExpressionIR(newClassInstance.expression), None)
+    case stringLiteral: StringLiteral => StringLiteralIR(stringLiteral.value)
+    case ternary: Ternary => TernaryIR()
+    case tuple: Tuple => TupleIR()
+    case boolConst: BoolConst => BoolConstIR()
+    case not: Not => NotIR()
+    case aBinary: ABinary => ABinaryIR(aBinOpToABinOpIR(aBinary.op), expressionToExpressionIR(aBinary.expression1), expressionToExpressionIR(aBinary.expression2))
+    case bBinary: BBinary => BBinaryIR(bBinOpToBBinOpIR(bBinary.op), expressionToExpressionIR(bBinary.expression1), expressionToExpressionIR(bBinary.expression2))
+    case rBinary: RBinary => RBinaryIR(rBinOpToRBinOpIR(rBinary.op), expressionToExpressionIR(rBinary.expression1), expressionToExpressionIR(rBinary.expression2))
     case intConst: IntConst => IntConstIR(intConst.value)
+    case doubleConst: DoubleConst => DoubleConstIR(doubleConst.value)
+    case floatConst: FloatConst => FloatConstIR(floatConst.value)
+    case longConst: LongConst => LongConstIR(longConst.value)
+    case neg: Neg => NegIR(expressionToExpressionIR(neg))
   }
 
   case class Array() extends Expression
@@ -177,6 +192,8 @@ object AST {
     case assign: Assign => AssignIR(nameToNameIR(assign.name), None, assign.immutable, blockToBlockIR(assign.block))
     case blockStmt: BlockStmt => BlockStmtIR(blockStmt.statements.map(statementToStatementIR))
     case classModel: ClassModel => ClassModelIR(nameToNameIR(classModel.name), classModel.modifiers.map(modifierToModifierIR), classModel.fields.map(fieldToFieldIR), None, classModel.parentArguments.map(expressionToExpressionIR), classModel.interfaces.map(typeToTypeIR), statementToStatementIR(classModel.body))
+    case objectModel: ObjectModel => ObjectModelIR(nameToNameIR(objectModel.name), objectModel.modifiers.map(modifierToModifierIR), objectModel.fields.map(fieldToFieldIR), None, objectModel.parentArguments.map(expressionToExpressionIR), objectModel.interfaces.map(typeToTypeIR), statementToStatementIR(objectModel.body))
+    case traitModel: TraitModel => TraitModelIR(nameToNameIR(traitModel.name), traitModel.modifiers.map(modifierToModifierIR), traitModel.fields.map(fieldToFieldIR), None, traitModel.parentArguments.map(expressionToExpressionIR), traitModel.interfaces.map(typeToTypeIR), statementToStatementIR(traitModel.body))
     case method: Method => {
       if(method.returnType.isDefined)
       {
@@ -187,6 +204,38 @@ object AST {
         MethodIR(nameToNameIR(method.name), method.annotations.map(annotationToAnnotationIR), method.fields.map(fieldToFieldIR), method.modifiers.map(modifierToModifierIR), None, blockToBlockIR(method.body))
       }
     }
+    case f: For => ForIR()
+    case w: While => WhileIR()
+    case ifStatement: If => IfIR(expressionToExpressionIR(ifStatement.condition), statementToStatementIR(ifStatement.ifBlock), statementToStatementIR(ifStatement.elseBlock))
+    case assign: Assign =>
+    {
+      if(assign.`type`.isDefined)
+      {
+          AssignIR(nameToNameIR(assign.name), Some(typeToTypeIR(assign.`type`.get)), true, blockToBlockIR(assign.block))
+      }
+      else {
+        AssignIR(nameToNameIR(assign.name), None, true, blockToBlockIR(assign.block))
+      }
+    }
+    case assignMultiple: AssignMultiple => {
+      if(assignMultiple.`type`.isDefined)
+      {
+        AssignMultipleIR(assignMultiple.name.map(nameToNameIR), Some(typeToTypeIR(assignMultiple.`type`.get)), true, blockToBlockIR(assignMultiple.block))
+      }
+      else
+      {
+        AssignMultipleIR(assignMultiple.name.map(nameToNameIR), None, true, blockToBlockIR(assignMultiple.block))
+      }
+    }
+    case reassign: Reassign => ReassignIR(nameToNameIR(reassign.name), blockToBlockIR(reassign.block))
+    case r: Return => ReturnIR()
+    case _: Lambda => LambdaIR()
+    case _: ModelDef => ModelDefIR()
+    case exprAsStmt: ExprAsStmt => ExprAsStmtIR(expressionToExpressionIR(exprAsStmt.expression))
+    case blockStmt: BlockStmt => BlockStmtIR(blockStmt.statements.map(statementToStatementIR))
+    case _: Match => MatchIR()
+    case _: Print => PrintIR()
+    case _: Println => PrintlnIR()
   }
 
   case class Case(expression: Expression, block: Block)
@@ -201,9 +250,23 @@ object AST {
   case object Multiply extends ABinOp
   case object Divide extends ABinOp
 
+  def aBinOpToABinOpIR(aBinOp: ABinOp) = aBinOp match
+  {
+    case _: Add.type => AddIR
+    case _: Subtract.type => SubtractIR
+    case _: Multiply.type => MultiplyIR
+    case _: Divide.type => DivideIR
+  }
+
   trait BBinOp extends Operator
   case object And extends BBinOp
   case object Or extends BBinOp
+
+  def bBinOpToBBinOpIR(bBinOp: BBinOp) = bBinOp match
+  {
+    case _: And.type => AndIR
+    case _: Or.type => OrIR
+  }
 
   trait RBinOp extends Operator
   case object GreaterEqual extends RBinOp
@@ -212,19 +275,12 @@ object AST {
   case object Less extends RBinOp
   case object Equal extends RBinOp
 
-  def operatorToOperatorIR(operator: Operator) = operator match
+  def rBinOpToRBinOpIR(rBinOp: RBinOp) = rBinOp match
   {
-    case _: Add.type => AddIR
-    case _: Subtract.type => SubtractIR
-    case _: Multiply.type => MultiplyIR
-    case _: Divide.type => DivideIR
-    case _: And.type => AndIR
-    case _: Or.type => OrIR
     case _: GreaterEqual.type => GreaterEqualIR
     case _: Greater.type => GreaterIR
     case _: LessEqual.type => LessEqualIR
     case _: Less.type => LessIR
     case _: Equal.type => EqualIR
   }
-
 }
