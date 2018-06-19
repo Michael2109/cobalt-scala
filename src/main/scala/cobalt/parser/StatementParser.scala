@@ -3,6 +3,7 @@ package cobalt.parser
 import fastparse.noApi._
 import WsApi._
 import cobalt.ast.AST._
+import cobalt.parser
 
 object StatementParser extends Statements(0)
 
@@ -13,6 +14,7 @@ class Statements(indent: Int) {
   val ENDMARKER: P0 = P(End)
   val indents = P("\n" ~~ " ".repX(indent))
   val spaces = P((LexicalParser.nonewlinewscomment.? ~~ "\n").repX(1))
+  val space_indents = P( spaces.repX ~~ " ".repX(indent) )
 
   val assignParser: P[Assign] = P(LexicalParser.kw("let") ~ ("mutable").!.? ~ ExpressionParser.nameParser ~ (":" ~ ExpressionParser.typeRefParser).? ~ "=" ~ blockParser).map(x => Assign(x._2, x._3, x._1.isEmpty, x._4))
 
@@ -22,7 +24,15 @@ class Statements(indent: Int) {
 
   val exprAsStmt: P[Statement] = ExpressionParser.expressionParser.map(ExprAsStmt)
 
-  val ifStatementParser: P[Statement] = P(LexicalParser.kw("if") ~ "(" ~ ExpressionParser.expressionParser ~ ")" ~~ indentedBlock).map(x => If(x._1, x._2, null))
+  val ifStatementParser: P[If] = {
+    def ifParser: P[(Expression, Statement)] = P(LexicalParser.kw("if") ~ ExpressionParser.expressionParser ~ LexicalParser.kw("then") ~~ blockParser).map(x => (x._1, x._2))
+    def elseParser: P[Statement] = P(elifP ~ elseParser.?).map(x => If(x._1, x._2, x._3)) | P(elseP)
+
+    def elifP: P[(Expression, Statement)] = P(LexicalParser.kw("elif") ~ ExpressionParser.expressionParser ~ LexicalParser.kw("then") ~~ blockParser).map(x => (x._1, x._2))
+    def elseP: P[Statement] = P(LexicalParser.kw("else") ~~ blockParser).map(x => x)
+
+    P(ifParser ~ elseParser.?).map(x => If(x._1, x._2, x._3))
+  }
 
   val importParser: P[Import] = P(LexicalParser.kw("import") ~ ExpressionParser.nameParser.rep(sep=".")).map(Import)
 

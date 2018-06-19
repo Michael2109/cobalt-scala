@@ -113,7 +113,7 @@ object AST {
     case _: Pure.type => PureIR
   }
 
-  trait Block
+  trait Block extends Statement
   case class Inline(expression: Expression) extends Block
   case class DoBlock(statement: Statement) extends Block
 
@@ -174,7 +174,7 @@ object AST {
   case class Method(name: Name, annotations: Seq[Annotation], fields: Seq[Field], modifiers: Seq[Modifier], returnType: Option[Type], body: Block) extends Statement
   case class For() extends Statement
   case class While() extends Statement
-  case class If(condition: Expression, ifBlock: Statement, elseBlock: Statement) extends Statement
+  case class If(condition: Expression, ifBlock: Statement, elseBlock: Option[Statement]) extends Statement
   case class Assign(name: Name, `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
   case class AssignMultiple(name: Seq[Name], `type`: Option[Type], immutable: Boolean, block: Block) extends Statement
   case class Reassign(name: Name, block: Block) extends Statement
@@ -206,7 +206,17 @@ object AST {
     }
     case f: For => ForIR()
     case w: While => WhileIR()
-    case ifStatement: If => IfIR(expressionToExpressionIR(ifStatement.condition), statementToStatementIR(ifStatement.ifBlock), statementToStatementIR(ifStatement.elseBlock))
+    case ifStatement: If => {
+      if(ifStatement.elseBlock.isDefined)
+      {
+        IfIR(expressionToExpressionIR(ifStatement.condition), statementToStatementIR(ifStatement.ifBlock), Some(statementToStatementIR(ifStatement.elseBlock.get)))
+      }
+      else
+      {
+        IfIR(expressionToExpressionIR(ifStatement.condition), statementToStatementIR(ifStatement.ifBlock), None)
+      }
+
+    }
     case assign: Assign =>
     {
       if(assign.`type`.isDefined)
