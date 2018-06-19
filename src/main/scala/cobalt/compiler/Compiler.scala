@@ -11,6 +11,7 @@ import cobalt.parser.StatementParser
 import fastparse.core.Parsed
 
 import scala.io.Source
+import scala.tools.fusesource_embedded.jansi.AnsiConsole
 
 class Compiler(commandLineOptions: Map[CommandLineOption, Any], classPath: Path, pathsToCompile: List[Path], outputDir: Path) {
 
@@ -42,12 +43,16 @@ class Compiler(commandLineOptions: Map[CommandLineOption, Any], classPath: Path,
 
     // Save to destination directory
 
-    // Create class file
-    val file = new File(classPath.toAbsolutePath.resolve(outputDir).resolve(pathsToCompile(0)).toString.replaceFirst("[.][^.]+$", "") + ".class")
-    file.mkdirs()
-    file.createNewFile()
+    val parent = new File(outputDir.resolve(pathsToCompile(0)).getParent.toString)
+    parent.mkdirs()
+    println(parent.toString)
 
-    val bos = new BufferedOutputStream(new FileOutputStream(classPath.toAbsolutePath.resolve(outputDir).resolve(pathsToCompile(0)).toString.replaceFirst("[.][^.]+$", "") + ".class"))
+    // Create class file
+    val file = new File(outputDir.resolve(pathsToCompile(0)).toString.replaceFirst("[.][^.]+$", "") + ".class")
+    file.createNewFile()
+    println(file)
+
+    val bos = new BufferedOutputStream(new FileOutputStream(outputDir.resolve(pathsToCompile(0)).toString.replaceFirst("[.][^.]+$", "") + ".class"))
 
     bos.write(moduleBytecodes(0))
     bos.close()
