@@ -14,12 +14,58 @@ class IfStatementParserTest extends FunSpec with Matchers
 {
     describe("If statement parser")
   {
-    it("Should parse if statement - true condition")
+    it("Should parse if statement - inline")
     {
       val code =
         """if true then x
         """.stripMargin.replace("\r", "")
-      TestUtil.parse(code, StatementParser.statement) shouldBe DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x"))), ExprAsStmt(Identifier(Name("y"))), ExprAsStmt(Identifier(Name("z"))))))
+      TestUtil.parse(code, StatementParser.statement) shouldBe If(Identifier(Name("true")),Inline(Identifier(Name("x"))),None)
+    }
+
+    it("Should parse if statement - do block")
+    {
+      val code =
+        """if true then do
+          |  x
+        """.stripMargin.replace("\r", "")
+      TestUtil.parse(code, StatementParser.statement) shouldBe If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x")))))),None)
+    }
+
+    it("Should parse if statement - elif")
+    {
+      val code =
+        """if true then do
+          |  x
+          |elif true then do
+          |  y
+        """.stripMargin.replace("\r", "")
+      TestUtil.parse(code, StatementParser.statement) shouldBe If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x")))))),Some(If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("y")))))),None)))
+    }
+
+    it("Should parse if statement - multiple elif")
+    {
+      val code =
+        """if true then do
+          |  x
+          |elif true then do
+          |  y
+          |elif true then do
+          |  z
+        """.stripMargin.replace("\r", "")
+      TestUtil.parse(code, StatementParser.statement) shouldBe If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x")))))),Some(If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("y")))))),Some(If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("z")))))),None)))))
+    }
+
+    it("Should parse if statement - elif else")
+    {
+      val code =
+        """if true then do
+          |  x
+          |elif true then do
+          |  y
+          |else do
+          |  z
+        """.stripMargin.replace("\r", "")
+      TestUtil.parse(code, StatementParser.statement) shouldBe If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x")))))),Some(If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("y")))))),None)))
     }
   }
 

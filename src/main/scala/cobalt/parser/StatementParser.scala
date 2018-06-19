@@ -25,13 +25,13 @@ class Statements(indent: Int) {
   val exprAsStmt: P[Statement] = ExpressionParser.expressionParser.map(ExprAsStmt)
 
   val ifStatementParser: P[If] = {
-    def ifParser: P[(Expression, Statement)] = P(LexicalParser.kw("if") ~ ExpressionParser.expressionParser ~ P(LexicalParser.kw("then")) ~~ blockParser).map(x => (x._1, x._2))
+    def ifParser: P[(Expression, Statement)] = P(LexicalParser.kw("if") ~ ExpressionParser.expressionParser ~ P(LexicalParser.kw("then")) ~ blockParser).map(x => (x._1, x._2))
     def elseParser: P[Statement] = P(elifP ~ elseParser.?).map(x => If(x._1, x._2, x._3)) | P(elseP)
 
-    def elifP: P[(Expression, Statement)] = P(LexicalParser.kw("elif") ~ ExpressionParser.expressionParser ~ LexicalParser.kw("then") ~~ blockParser).map(x => (x._1, x._2))
+    def elifP: P[(Expression, Statement)] = P(LexicalParser.kw("elif") ~ ExpressionParser.expressionParser ~ LexicalParser.kw("then") ~ blockParser).map(x => (x._1, x._2))
     def elseP: P[Statement] = P(LexicalParser.kw("else") ~~ blockParser).map(x => x)
 
-    P(ifParser ).map(x => If(x._1, x._2, None))
+    P(ifParser ~ elseParser.?).map(x => If(x._1, x._2, x._3))
   }
 
   val importParser: P[Import] = P(LexicalParser.kw("import") ~ ExpressionParser.nameParser.rep(sep=".")).map(Import)
