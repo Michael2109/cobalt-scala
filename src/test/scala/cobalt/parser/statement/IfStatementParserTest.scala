@@ -17,8 +17,7 @@ class IfStatementParserTest extends FunSpec with Matchers
     it("Should parse if statement - true condition")
     {
       val code =
-        """if True then
-          |    x
+        """if true then x
         """.stripMargin.replace("\r", "")
       TestUtil.parse(code, StatementParser.statement) shouldBe DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(Identifier(Name("x"))), ExprAsStmt(Identifier(Name("y"))), ExprAsStmt(Identifier(Name("z"))))))
     }

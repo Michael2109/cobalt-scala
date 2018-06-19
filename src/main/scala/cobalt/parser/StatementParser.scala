@@ -25,13 +25,13 @@ class Statements(indent: Int) {
   val exprAsStmt: P[Statement] = ExpressionParser.expressionParser.map(ExprAsStmt)
 
   val ifStatementParser: P[If] = {
-    def ifParser: P[(Expression, Statement)] = P(LexicalParser.kw("if") ~ ExpressionParser.expressionParser ~ LexicalParser.kw("then") ~~ blockParser).map(x => (x._1, x._2))
+    def ifParser: P[(Expression, Statement)] = P(LexicalParser.kw("if") ~ ExpressionParser.expressionParser ~ P(LexicalParser.kw("then")) ~~ blockParser).map(x => (x._1, x._2))
     def elseParser: P[Statement] = P(elifP ~ elseParser.?).map(x => If(x._1, x._2, x._3)) | P(elseP)
 
     def elifP: P[(Expression, Statement)] = P(LexicalParser.kw("elif") ~ ExpressionParser.expressionParser ~ LexicalParser.kw("then") ~~ blockParser).map(x => (x._1, x._2))
     def elseP: P[Statement] = P(LexicalParser.kw("else") ~~ blockParser).map(x => x)
 
-    P(ifParser ~ elseParser.?).map(x => If(x._1, x._2, x._3))
+    P(ifParser ).map(x => If(x._1, x._2, None))
   }
 
   val importParser: P[Import] = P(LexicalParser.kw("import") ~ ExpressionParser.nameParser.rep(sep=".")).map(Import)
@@ -48,7 +48,7 @@ class Statements(indent: Int) {
 
   val reassignParser: P[Reassign] = P(ExpressionParser.nameParser ~ "<-" ~ blockParser).map(x => Reassign(x._1, x._2))
 
-  val statement: P[Statement] = P(methodParser | assignParser | reassignParser | ifStatementParser | exprAsStmt)
+  val statement: P[Statement] = P(ifStatementParser | methodParser | assignParser | reassignParser | exprAsStmt)
 
   val indentedBlock: P[Statement] = {
     val deeper: P[Int] = {
