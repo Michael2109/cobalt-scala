@@ -123,7 +123,6 @@ object AST {
     case inline: Inline => InlineIR(expressionToExpressionIR(inline.expression))
   }
 
-  // TODO Update args
   trait Expression
   case class BlockExpr(expressions: Seq[Expression]) extends Expression
   case class Identifier(name: Name) extends Expression
@@ -246,6 +245,8 @@ object AST {
     case _: Match => MatchIR()
     case _: Print => PrintIR()
     case _: Println => PrintlnIR()
+    case inline: Inline => InlineIR(expressionToExpressionIR(inline.expression))
+    case doBlock: DoBlock => DoBlockIR(statementToStatementIR(doBlock.statement))
   }
 
   case class Case(expression: Expression, block: Block)

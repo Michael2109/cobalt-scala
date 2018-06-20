@@ -1,6 +1,5 @@
 package cobalt.code_gen
 
-import cobalt.ast.AST.{Assign, Block, BlockExpr, BlockStmt, ClassModel, DoBlock, Expression, Inline, IntConst, Method, Module, Statement}
 import cobalt.ir.IR._
 
 import scala.tools.asm._
@@ -49,6 +48,7 @@ object CodeGen
   {
     expression match
     {
+      case boolConst: BoolConstIR => mv.visitIincInsn(Opcodes.BIPUSH, 1)
       case blockStmt: BlockExprIR => blockStmt.expressions.foreach(x => genCode(mv, x))
       case intConst: IntConstIR => intConstCodeGen(mv, intConst)
     }
@@ -63,6 +63,18 @@ object CodeGen
         mv.visitVarInsn(Opcodes.ISTORE, (math.random() * 100).asInstanceOf[Int])
       }
       case blockStmt: BlockStmtIR => blockStmt.statements.foreach(x => genCode(mv, x))
+      case exprAsStmt: ExprAsStmtIR => genCode(mv, exprAsStmt.expression)
+      case ifStmt: IfIR => {
+        val trueLabel = new Label
+        val endLabel = new Label
+        genCode(mv, ifStmt.condition)
+        mv.visitJumpInsn(Opcodes.IFEQ, trueLabel)
+        genCode(mv, ifStmt.elseBlock.getOrElse(BlockStmtIR(Seq())))
+        mv.visitJumpInsn(Opcodes.GOTO, endLabel)
+        mv.visitLabel(trueLabel)
+        genCode(mv, ifStmt.ifBlock.asInstanceOf[BlockIR])
+        mv.visitLabel(endLabel)
+      }
     }
   }
 

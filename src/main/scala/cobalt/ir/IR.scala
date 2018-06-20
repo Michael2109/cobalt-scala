@@ -45,10 +45,6 @@ object IR {
   case object FinalIR extends ModifierIR
   case object PureIR extends ModifierIR
 
-  trait BlockIR
-  case class InlineIR(expression: ExpressionIR) extends BlockIR
-  case class DoBlockIR(statement: StatementIR) extends BlockIR
-
   // TODO Update args
   trait ExpressionIR
   case class BlockExprIR(expressions: Seq[ExpressionIR]) extends ExpressionIR
@@ -71,6 +67,10 @@ object IR {
 
   case class ArrayIR() extends ExpressionIR
   case class SpecialRefAsExprIR() extends ExpressionIR
+
+  trait BlockIR extends StatementIR
+  case class InlineIR(expression: ExpressionIR) extends BlockIR
+  case class DoBlockIR(statement: StatementIR) extends BlockIR
 
   trait StatementIR
   case class ClassModelIR(name: NameIR, modifiers: Seq[ModifierIR], fields: Seq[FieldIR], parent: Option[TypeIR], parentArguments: Seq[ExpressionIR], interfaces: Seq[TypeIR], body: StatementIR) extends StatementIR
