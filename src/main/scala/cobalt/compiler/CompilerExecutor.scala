@@ -8,10 +8,8 @@ object CompilerExecutor {
 
   def main(args: Array[String]): Unit = {
 
-    val arguments = "-cp src/test/resources/cobalt/ -d cobalt_generated/ test/Test.cobalt".split("\\s")
+    if (args.length == 0) println(usage)
 
-    if (arguments.length == 0) println(usage)
-    val arglist = arguments.toList
     type OptionMap = Map[CommandLineOption, String]
 
     def nextOption(commandLineOptions: OptionMap, list: List[String]): OptionMap = {
@@ -27,8 +25,8 @@ object CompilerExecutor {
       }
     }
 
-    val options = nextOption(Map(), arglist)
-    println(options)
+    val options = nextOption(Map(), args.toList)
+    println("Compiler Options: " + options)
 
     new Compiler(options, Paths.get(options.get(ClassPath).get), List[Path](Paths.get(options.get(FilePath).get)), Paths.get(options.get(DestinationPath).get)).compile()
   }
