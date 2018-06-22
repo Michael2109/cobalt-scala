@@ -129,7 +129,7 @@ object AST {
   case class MethodCall(name: Name, expression: Expression) extends Expression
   case class NewClassInstance(`type`: Type, expression: Expression, anonymousClass: Option[Statement]) extends Expression
   case class StringLiteral(value: String) extends Expression
-  case class Ternary() extends Expression
+  case class Ternary(condition: Expression, ifExpr: Expression, elseExpr: Expression) extends Expression
   case class Tuple() extends Expression
   case class BoolConst() extends Expression
   case class Not() extends Expression

@@ -20,13 +20,15 @@ object ExpressionParser {
   private val termParser: P[Expression] = P(Chain(allExpressionsParser, multiply | divide ))
   private val parensParser: P[Expression] = P( "(" ~ (expressionParser) ~ ")" )
 
-  private val allExpressionsParser = numberParser | identifierParser | stringLiteral | parensParser
+  private val allExpressionsParser = ternaryParser | numberParser | identifierParser | stringLiteral | parensParser
 
   def finalModifierParser: P[AST.Final.type] = P("final").map(x => Final)
 
-  def methodCallParser: P[MethodCall] = (nameParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => MethodCall(x._1, BlockExpr(x._2)))
+  def methodCallParser: P[MethodCall] = P(nameParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => MethodCall(x._1, BlockExpr(x._2)))
 
-  def newClassInstanceParser: P[NewClassInstance] = ("new" ~ typeRefParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => NewClassInstance(x._1, BlockExpr(x._2), None))
+  def newClassInstanceParser: P[NewClassInstance] = P("new" ~ typeRefParser ~ "(" ~ expressionParser.rep(sep = ",") ~ ")").map(x => NewClassInstance(x._1, BlockExpr(x._2), None))
+
+  def ternaryParser: P[Ternary] = P(LexicalParser.kw("if") ~ expressionParser ~ "then" ~ expressionParser ~ "else" ~ expressionParser).map(x => Ternary(x._1, x._2, x._3))
 
   def typeRefParser: P[Type] = nameParser.map(x => TypeRef(RefLocal(x)))
 
