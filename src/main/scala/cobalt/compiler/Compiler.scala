@@ -45,12 +45,10 @@ class Compiler(commandLineOptions: Map[CommandLineOption, Any], classPath: Path,
 
     val parent = new File(outputDir.resolve(pathsToCompile(0)).getParent.toString)
     parent.mkdirs()
-    println(parent.toString)
 
     // Create class file
     val file = new File(outputDir.resolve(pathsToCompile(0)).toString.replaceFirst("[.][^.]+$", "") + ".class")
     file.createNewFile()
-    println(file)
 
     val bos = new BufferedOutputStream(new FileOutputStream(outputDir.resolve(pathsToCompile(0)).toString.replaceFirst("[.][^.]+$", "") + ".class"))
 
