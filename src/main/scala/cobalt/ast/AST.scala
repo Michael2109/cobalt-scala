@@ -131,7 +131,7 @@ object AST {
   case class StringLiteral(value: String) extends Expression
   case class Ternary(condition: Expression, ifExpr: Expression, elseExpr: Expression) extends Expression
   case class Tuple() extends Expression
-  case class BoolConst() extends Expression
+  case class BoolConst(value: Boolean) extends Expression
   case class Not() extends Expression
   case class ABinary(op: ABinOp, expression1: Expression, expression2: Expression) extends Expression
   case class BBinary(op: BBinOp, expression1: Expression, expression2: Expression) extends Expression
@@ -145,13 +145,25 @@ object AST {
   def expressionToExpressionIR(expression: Expression): ExpressionIR = expression match
   {
     case blockExpr: BlockExpr => BlockExprIR(blockExpr.expressions.map(expressionToExpressionIR))
-    case identifier: Identifier => IdentifierIR(nameToNameIR(identifier.name))
-    case methodCall: MethodCall => MethodCallIR(nameToNameIR(methodCall.name), expressionToExpressionIR(methodCall.expression))
+    case identifier: Identifier => {
+      identifier.name.value match {
+        case "true" => BoolConstIR(true)
+        case "false" => BoolConstIR(false)
+        case _ => IdentifierIR(nameToNameIR(identifier.name))
+      }
+    }
+    case methodCall: MethodCall => {
+      methodCall.name.value match {
+        case "print" | "println" => MethodCallIR(nameToNameIR(methodCall.name), expressionToExpressionIR(methodCall.expression))
+        case _ => MethodCallIR(nameToNameIR(methodCall.name), expressionToExpressionIR(methodCall.expression))
+      }
+
+    }
     case newClassInstance: NewClassInstance => NewClassInstanceIR(typeToTypeIR(newClassInstance.`type`), expressionToExpressionIR(newClassInstance.expression), None)
     case stringLiteral: StringLiteral => StringLiteralIR(stringLiteral.value)
     case ternary: Ternary => TernaryIR()
     case tuple: Tuple => TupleIR()
-    case boolConst: BoolConst => BoolConstIR()
+    case boolConst: BoolConst => BoolConstIR(boolConst.value)
     case not: Not => NotIR()
     case aBinary: ABinary => ABinaryIR(aBinOpToABinOpIR(aBinary.op), expressionToExpressionIR(aBinary.expression1), expressionToExpressionIR(aBinary.expression2))
     case bBinary: BBinary => BBinaryIR(bBinOpToBBinOpIR(bBinary.op), expressionToExpressionIR(bBinary.expression1), expressionToExpressionIR(bBinary.expression2))

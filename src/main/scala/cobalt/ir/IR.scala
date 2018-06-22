@@ -54,7 +54,7 @@ object IR {
   case class StringLiteralIR(value: String) extends ExpressionIR
   case class TernaryIR() extends ExpressionIR
   case class TupleIR() extends ExpressionIR
-  case class BoolConstIR() extends ExpressionIR
+  case class BoolConstIR(value: Boolean) extends ExpressionIR
   case class NotIR() extends ExpressionIR
   case class ABinaryIR(op: ABinOpIR, expression1: ExpressionIR, expression2: ExpressionIR) extends ExpressionIR
   case class BBinaryIR(op: BBinOpIR, expression1: ExpressionIR, expression2: ExpressionIR) extends ExpressionIR
