@@ -33,6 +33,29 @@ class MethodParserTest extends FunSpec with Matchers
       TestUtil.parse(code, StatementParser.statement) shouldBe Method(Name("exampleMethod"),List(),ArrayBuffer(),List(),Some(TypeRef(RefLocal(Name("Int")))),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(IntConst(1))))))
     }
 
+    it("Should parse method definitions with multiple expressions")
+    {
+      val code =
+        """let exampleMethod(): Int = do
+          |  1
+          |  2
+        """.stripMargin.replace("\r", "")
+      TestUtil.parse(code, StatementParser.statement) shouldBe Method(Name("exampleMethod"),List(),ArrayBuffer(),List(),Some(TypeRef(RefLocal(Name("Int")))),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(IntConst(1)), ExprAsStmt(IntConst(2))))))
+    }
+
+    it("Should parse method definitions with multiple statements")
+    {
+      val code =
+        """let exampleMethod(): Int = do
+          |  if true then do
+          |    1
+          |  elif false then do
+          |    2
+          |  3
+        """.stripMargin.replace("\r", "")
+      TestUtil.parse(code, StatementParser.statement) shouldBe Method(Name("exampleMethod"),List(),ArrayBuffer(),List(),Some(TypeRef(RefLocal(Name("Int")))),DoBlock(BlockStmt(ArrayBuffer(If(Identifier(Name("true")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(IntConst(1))))),Some(If(Identifier(Name("false")),DoBlock(BlockStmt(ArrayBuffer(ExprAsStmt(IntConst(2))))),None))), ExprAsStmt(IntConst(3))))))
+    }
+
     it("Should parse method definitions with nested methods")
     {
       val code =
