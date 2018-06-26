@@ -25,8 +25,6 @@ class Compiler(commandLineOptions: Map[CommandLineOption, Any], classPath: Path,
 
     // Parse them
     val asts = cobaltFiles.map(cobaltFile => {
-      import scala.reflect.runtime.universe._
-      println(Literal(Constant(cobaltFile.replace("\r", ""))))
       StatementParser.moduleParser.parse(cobaltFile.replace("\r", ""))
     })
 

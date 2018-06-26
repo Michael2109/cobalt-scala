@@ -40,6 +40,17 @@ object CodeGen {
 
   def genCode(mv: MethodVisitor, expression: ExpressionIR): Unit = {
     expression match {
+      case aBinary: ABinaryIR => {
+        genCode(mv, aBinary.expression1)
+        genCode(mv, aBinary.expression2)
+        val instruction = aBinary.op match {
+          case AddIR => Opcodes.IADD
+          case SubtractIR => Opcodes.ISUB
+          case MultiplyIR => Opcodes.IMUL
+          case DivideIR => Opcodes.IDIV
+        }
+        mv.visitInsn(instruction)
+      }
       case boolConst: BoolConstIR => mv.visitIntInsn(Opcodes.BIPUSH,
         if (boolConst.value.equals(true)) {
           1
