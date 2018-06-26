@@ -1,7 +1,15 @@
 package cobalt.integration
 
-import org.scalatest.{FunSpec, Matchers}
+import org.scalatest.Matchers
 
 class ModuleCompileTest extends IntegrationSetup with Matchers {
+
+  describe("Compile a module"){
+
+    it("Should compile a module"){
+
+    }
+
+  }
 
 }

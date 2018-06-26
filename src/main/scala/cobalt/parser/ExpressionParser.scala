@@ -7,7 +7,7 @@ import cobalt.ast.{AST}
 
 object ExpressionParser {
 
-  val annotationParser: P[Annotation] = nameParser.map(Annotation)
+  val annotationParser: P[Annotation] = P("@" ~ nameParser).map(Annotation)
 
   val identifierParser: P[AST.Identifier] = LexicalParser.identifier.map(x => Identifier(Name(x)))
   val nameParser: P[Name] = LexicalParser.identifier.map(x => Name(x))
